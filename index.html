@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="theme-color" content="#1B3A5C"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="Growing Up"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="description" content="Week-by-week home curriculum for your daughter — 15 months to 2 years."/>
+<title>Growing Up Wonderful</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;background:#F7F9FC;overscroll-behavior:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}
+  body{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);}
+  #app{height:100vh;display:flex;flex-direction:column;max-width:500px;margin:0 auto;position:relative;overflow:hidden;}
+  .screen{flex:1;overflow-y:auto;padding-bottom:72px;}
+  .screen::-webkit-scrollbar{display:none;}
+
+  /* Header */
+  .week-header{padding:16px 20px 22px;color:#fff;}
+  .week-header .label{font-size:10px;opacity:.7;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:4px;}
+  .week-header .title{font-size:22px;font-weight:800;margin-bottom:2px;}
+  .week-header .sub{font-size:12px;opacity:.8;margin-bottom:12px;}
+  .week-header .theme{font-size:22px;font-weight:800;line-height:1.2;margin-bottom:10px;}
+  .week-header .badge{display:inline-block;background:rgba(255,255,255,.18);border-radius:8px;padding:5px 12px;font-size:12px;font-weight:600;}
+  .header-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+  .week-btn{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:7px 12px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;}
+
+  /* Rhythm strip */
+  .rhythm-wrap{background:#fff;border-bottom:1px solid #E8ECEF;}
+  .rhythm-label{padding:10px 20px 4px;font-size:10px;font-weight:700;color:#9CA3AF;letter-spacing:1.5px;text-transform:uppercase;}
+  .rhythm-row{display:flex;overflow-x:auto;padding:4px 16px 12px;gap:8px;scrollbar-width:none;}
+  .rhythm-row::-webkit-scrollbar{display:none;}
+  .rhythm-card{min-width:70px;background:#F7F9FC;border-radius:10px;padding:8px 6px;text-align:center;border:1px solid #E8ECEF;flex-shrink:0;}
+  .rhythm-card .ri{font-size:18px;margin-bottom:3px;}
+  .rhythm-card .rl{font-size:9px;font-weight:700;color:#374151;line-height:1.3;}
+  .rhythm-card .rd{font-size:8px;color:#9CA3AF;margin-top:2px;}
+
+  /* Intro card */
+  .intro-card{margin:16px 20px 0;border-radius:14px;padding:16px;border-left:4px solid;}
+  .intro-card .ic-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px;}
+  .intro-card .ic-text{font-size:14px;line-height:1.65;color:#374151;}
+
+  /* Tabs */
+  .tabs{display:flex;margin:16px 20px 12px;background:#E8ECEF;border-radius:12px;padding:3px;}
+  .tab-btn{flex:1;padding:8px 2px;border-radius:10px;border:none;cursor:pointer;font-size:10px;font-weight:500;line-height:1.2;transition:all .15s;background:transparent;color:#6B7280;}
+  .tab-btn.active{background:#fff;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.1);}
+
+  /* Activity cards */
+  .activity-list{padding:0 20px 16px;display:flex;flex-direction:column;gap:10px;}
+  .act-card{background:#fff;border-radius:16px;padding:16px;border:1px solid #E8ECEF;box-shadow:0 1px 4px rgba(0,0,0,.04);}
+  .act-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .act-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+  .act-name{font-size:14px;font-weight:700;color:#1A1A1A;}
+  .act-time{font-size:11px;font-weight:600;margin-top:1px;}
+  .act-desc{font-size:13.5px;line-height:1.65;color:#374151;margin-bottom:10px;}
+  .act-mat{background:#F7F9FC;border-radius:10px;padding:9px 12px;}
+  .act-mat-label{font-size:10px;font-weight:800;color:#9CA3AF;letter-spacing:.5px;}
+  .act-mat-text{font-size:12.5px;color:#4B5563;}
+
+  /* Watch/Milestones/Adapt */
+  .info-card{background:#fff;border-radius:16px;padding:16px;border:1px solid #E8ECEF;margin:0 20px 10px;}
+  .info-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;}
+  .info-item{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start;}
+  .info-num{width:24px;height:24px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;}
+  .info-text{font-size:13.5px;line-height:1.6;color:#374151;padding-top:2px;}
+  .milestone-note{margin-top:4px;background:#FEF3C7;border-radius:12px;padding:10px 14px;font-size:12.5px;color:#92400E;line-height:1.5;}
+  .adapt-card{background:#EDF4ED;border-radius:16px;padding:16px;border:1px solid rgba(90,122,90,.2);margin:0 20px 10px;}
+  .adapt-title{display:flex;gap:8px;align-items:center;margin-bottom:10px;}
+  .adapt-text{font-size:13.5px;line-height:1.65;color:#374151;}
+  .principle-card{background:#fff;border-radius:16px;padding:16px;border:1px solid #E8ECEF;margin:0 20px 16px;}
+  .principle-text{font-size:13.5px;line-height:1.65;color:#374151;font-style:italic;}
+
+  /* Documents */
+  .doc-list{padding:16px 20px;display:flex;flex-direction:column;gap:10px;}
+  .doc-card{background:#fff;border-radius:16px;padding:16px;border:1px solid #E8ECEF;display:flex;align-items:center;gap:14px;box-shadow:0 1px 4px rgba(0,0,0,.04);cursor:pointer;}
+  .doc-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+  .doc-name{font-size:14px;font-weight:700;color:#1A1A1A;margin-bottom:3px;}
+  .doc-desc{font-size:12px;color:#6B7280;line-height:1.4;}
+  .doc-tag{border-radius:8px;padding:4px 9px;font-size:10px;font-weight:700;flex-shrink:0;white-space:nowrap;}
+  .doc-add{background:#fff;border-radius:16px;padding:20px;border:2px dashed #D1D5DB;text-align:center;cursor:pointer;margin-top:4px;}
+
+  /* Overlays */
+  .overlay{position:absolute;inset:0;background:#fff;z-index:60;display:flex;flex-direction:column;}
+  .overlay-header{padding:16px 20px 20px;color:#fff;display:flex;align-items:center;justify-content:space-between;}
+  .overlay-header .label{font-size:10px;opacity:.7;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:4px;}
+  .overlay-header .title{font-size:22px;font-weight:800;}
+  .close-btn{background:rgba(255,255,255,.2);border:none;border-radius:10px;width:38px;height:38px;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+
+  /* Week list */
+  .week-list{overflow-y:auto;flex:1;padding:12px 16px 40px;}
+  .week-item{width:100%;border-radius:14px;padding:12px 14px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;text-align:left;border:1px solid #E8ECEF;background:#fff;}
+  .week-item.active{border-width:2px;}
+  .week-num{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0;}
+  .week-info{flex:1;min-width:0;}
+  .week-info-name{font-size:13.5px;font-weight:700;color:#1A1A1A;}
+  .week-info-sub{font-size:11px;color:#6B7280;margin-top:2px;}
+
+  /* Help chat */
+  .chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;}
+  .chat-msg{max-width:84%;padding:10px 14px;font-size:14px;line-height:1.55;}
+  .chat-msg.guide{align-self:flex-start;background:#F7F9FC;border:1px solid #E8ECEF;border-radius:16px 16px 16px 4px;color:#374151;}
+  .chat-msg.user{align-self:flex-end;background:#2A7B8C;color:#fff;border-radius:16px 16px 4px 16px;}
+  .chat-input-row{padding:12px 16px;border-top:1px solid #E8ECEF;display:flex;gap:8px;padding-bottom:max(env(safe-area-inset-bottom),12px);}
+  .chat-input{flex:1;background:#F7F9FC;border:1px solid #E8ECEF;border-radius:14px;padding:11px 14px;font-size:14px;outline:none;color:#374151;font-family:inherit;}
+  .chat-send{background:#2A7B8C;border:none;border-radius:14px;width:44px;height:44px;color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+  /* Notes */
+  .notes-body{flex:1;padding:20px;display:flex;flex-direction:column;}
+  .notes-hint{font-size:13px;color:#9CA3AF;margin-bottom:12px;line-height:1.5;}
+  .notes-ta{flex:1;background:#F7F9FC;border:1px solid #E8ECEF;border-radius:16px;padding:16px;font-size:14px;line-height:1.65;color:#374151;outline:none;resize:none;font-family:Georgia,'Times New Roman',serif;}
+  .notes-save{margin-top:14px;border:none;border-radius:14px;padding:14px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:max(env(safe-area-inset-bottom),0px);}
+
+  /* Floating help */
+  .fab{position:absolute;right:20px;bottom:84px;width:52px;height:52px;border-radius:26px;background:#5A7A5A;border:none;box-shadow:0 4px 18px rgba(90,122,90,.5);color:#fff;font-size:22px;cursor:pointer;z-index:40;display:flex;align-items:center;justify-content:center;}
+
+  /* Bottom nav */
+  .bottom-nav{background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-top:1px solid #E8ECEF;display:flex;z-index:30;padding-bottom:env(safe-area-inset-bottom,0px);}
+  .nav-btn{flex:1;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 8px;}
+  .nav-icon{font-size:22px;}
+  .nav-label{font-size:10px;font-weight:700;color:#9CA3AF;}
+  .nav-label.active{color:var(--week-color);}
+
+  /* Install banner */
+  .install-banner{background:#1B3A5C;color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
+  .install-banner p{flex:1;font-size:12px;line-height:1.4;}
+  .install-banner button{background:#fff;color:#1B3A5C;border:none;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;}
+  .install-banner .dismiss{background:none;border:none;color:rgba(255,255,255,.6);font-size:18px;cursor:pointer;padding:0;flex-shrink:0;}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+// ─── Data ────────────────────────────────────────────────────────────────────
+const WEEKS = [
+  { num:1, dates:"2–8 June", theme:"Hello, World Again", age:"~15 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Observation & Baseline",
+    intro:"This first week is about observation — yours. Spend a few days noticing where she naturally gravitates, what holds her attention, and how she moves through space. This is your baseline. Everything builds from it.",
+    activities:[
+      {name:"Treasure Basket",time:"10 min",icon:"🧺",desc:"Fill a low basket with 6–8 everyday objects of varied textures — a wooden spoon, a smooth stone, a small sponge, a metallic cup, a fabric square, a pinecone. Sit nearby and let her explore freely. Don't name things yet — just be present and warm.",materials:"Basket, wooden spoon, smooth stone, sponge, metallic cup, fabric square, pinecone"},
+      {name:"Outdoor Sound Walk",time:"15 min",icon:"🦜",desc:"Walk slowly outside. Stop when you hear something. Crouch to her level, point, and name it simply: 'Bird. Bird singing.' Pause and listen together before moving on.",materials:"Just yourselves and the outdoors"},
+      {name:"Mirror Time",time:"5 min",icon:"🪞",desc:"Hold her in front of a mirror. Point to her nose and say 'nose', then yours. Touch her ear, name it, touch yours. Don't rush — let her look and reach at her own pace. This builds early self-awareness.",materials:"Large mirror at low height or handheld"},
+      {name:"Scarf Peek-a-Boo",time:"5 min",icon:"🧣",desc:"Drape a scarf over your head and say 'where's Daddy?' in a playful voice. Pull it off with 'there he is!' Then offer the scarf to her. This develops object permanence and the delight of anticipation.",materials:"Light, breathable scarf or fabric square"},
+      {name:"Roll and Chase",time:"10 min",icon:"⚽",desc:"Sit on the floor, roll a soft ball slowly toward her. When she reaches for it, say 'your turn' and wait. This builds early turn-taking — a social foundation that matters as much as any vocabulary word.",materials:"Soft ball"},
+    ],
+    watchFor:["Does she bring objects to you to show or share?","How long does she sustain attention on a single object?","Does she attempt to imitate any sounds or gestures you make?","How does she react when you leave the room briefly?"],
+    milestones:["Walking with increasing confidence and balance","Using 1–3 recognizable words consistently","Pointing to indicate interest (proto-declarative pointing)","Showing clear attachment and preference for primary caregiver"],
+    adapt:"If she seems overwhelmed by the treasure basket, simplify to just 3 objects. If she speeds through everything, she needs more novelty and complexity — follow her lead. There's no wrong pace this week. You're just watching and learning her."
+  },
+  { num:2, dates:"9–15 June", theme:"My Body, My World", age:"~15.5 months", color:"#B05070", light:"#FCF0F2", focus:"Body Awareness & Language",
+    intro:"This week turns attention inward — to her body. Naming body parts isn't just vocabulary; it's the foundation of body awareness, self-regulation, and eventually emotional literacy. Keep it playful, rhythmic, and physical.",
+    activities:[
+      {name:"Body Part Song",time:"5 min",icon:"🎵",desc:"Sing 'Head and shoulders, knees and toes' or make your own tune. Touch each part on yourself first, then gently on her. Do it daily — repetition at this age is learning, not boredom.",materials:"Just your voice and hands"},
+      {name:"Footprint Art",time:"15 min",icon:"🎨",desc:"Press her foot gently in non-toxic paint and onto paper. Do the same with her hand. Name 'foot' and 'hand' as you do it. The sensory experience of the paint is the real learning — the print is just a souvenir.",materials:"Non-toxic washable paint, large paper, wet cloth for cleanup"},
+      {name:"Big Movement Parade",time:"10 min",icon:"🥁",desc:"March around the house together, stomping feet, swinging arms, patting knees. Call out the body part as you use it. Exaggerate your own movements — she will mirror you enthusiastically.",materials:"Open floor space"},
+      {name:"Baby Doll Care",time:"10 min",icon:"🪆",desc:"Use a doll or stuffed animal. Wash its face, pat its tummy, point to its nose. Narrate: 'washing the nose. Clean nose!' She's learning vocabulary AND early empathy.",materials:"Doll or soft toy, damp cloth"},
+      {name:"Lotion Massage",time:"5 min",icon:"💧",desc:"During nappy change or after bath, name each body part as you apply lotion. 'This is your ankle. Here are your toes — one, two, three...' Her skin is one of her first classrooms.",materials:"Child-safe lotion"},
+    ],
+    watchFor:["Can she point to at least 1–2 body parts when named?","Does she show enjoyment of physical rhythm and movement?","Is she starting to point to body parts on a doll or picture?","Watch for imitation of gross motor movements like clapping or stomping"],
+    milestones:["Beginning to point to named body parts (1–3 is typical)","Imitating actions with a 1–2 second delay","Walking with less falling; may attempt to climb low furniture","Handing objects to adults as a social gesture"],
+    adapt:"If she can already point to 4–5 body parts, introduce more specific ones: elbow, chin, wrist. If body part pointing isn't clicking yet, focus on the physical movement activities and return to naming next week. The play is always the point."
+  },
+  { num:3, dates:"16–22 June", theme:"Sound and Language", age:"~16 months", color:"#6B5EA8", light:"#F0EEF9", focus:"Language Foundation",
+    intro:"Language explodes in fits and starts at this age. Your most powerful tool isn't a flashcard — it's your voice. Narrate your day. Comment on what she's doing. Read aloud. Ask questions you don't need answered. You are building the neural scaffolding for every word that will come.",
+    activities:[
+      {name:"Sportscaster Narration",time:"10 min",icon:"🎙️",desc:"For 10 minutes during free play, narrate everything she does in simple sentences as if commentating a sports match: 'She picks up the block. It's a blue block. She's putting it in the box. Oh! It fell out.' This rich input is vocabulary gold.",materials:"None — just your voice during her play"},
+      {name:"Animal Sound Book",time:"10 min",icon:"📖",desc:"Read a simple board book with animal pictures. For each animal, make the sound before saying the name. If she makes a sound approximation, celebrate it with genuine delight.",materials:"Animal board book (library is perfect)"},
+      {name:"Sound Shakers",time:"10 min",icon:"🎲",desc:"Fill 4 small containers with different materials: rice, dried beans, bells, sand. Seal them well with tape. Shake each one and label the sound: 'loud', 'quiet', 'jingle', 'swoosh'. Then let her explore freely.",materials:"4 small sealed containers, rice, beans, bells or coins, fine sand"},
+      {name:"Rhyme Time",time:"5 min",icon:"🎶",desc:"Pick two simple nursery rhymes and repeat them daily this week — same rhymes, same time (nappy change is perfect). The repetition builds phonological awareness, a direct precursor to reading.",materials:"Just your voice"},
+      {name:"Request Practice",time:"5 min",icon:"🍪",desc:"Hold a snack just out of reach and wait. When she gestures or vocalises, name what she wants ('cracker?') and hand it over warmly. Don't withhold for long — this builds communication motivation, not frustration.",materials:"A snack she enjoys"},
+    ],
+    watchFor:["Is she attempting to repeat words or word-like sounds after you?","Does she respond to her name consistently?","Does she understand 'no' and a few simple instructions?","Are her babbles becoming more varied and melodic?"],
+    milestones:["Vocabulary of approximately 5–10 words (or approximations) is typical","Using gestures plus sounds to communicate wants","Showing comprehension of many more words than she can produce","Responding to simple one-step requests ('come here', 'give me')"],
+    adapt:"If she's already stringing two words together, start offering choices in language: 'apple or banana?' If words are slow to come, don't panic — keep talking. The language bath you're giving her is the treatment."
+  },
+  { num:4, dates:"23–29 June", theme:"Little Hands, Big Skills", age:"~16 months", color:"#D97706", light:"#FEF3C7", focus:"Fine Motor Development",
+    intro:"Fine motor development at this age is about pinching, grasping, releasing, and stacking. These are the physical foundation for writing, drawing, self-feeding, and dressing. Every time she tries to turn a page or pick up a pea, she's doing serious work.",
+    activities:[
+      {name:"Posting Box",time:"10 min",icon:"📦",desc:"Cut a hole in the lid of a shoebox just large enough for a wooden block or large coin to drop through. Show her once — drop an object in, shake the box so she hears it rattle — then let her practice.",materials:"Shoebox with cut lid, 5–6 large safe objects to post"},
+      {name:"Playdough Squish",time:"15 min",icon:"🟤",desc:"Make simple playdough (flour, salt, water) or use commercial. No agenda — just give her a lump and watch. Poke, squeeze, tear, pat: all valid fine motor work.",materials:"Playdough: 1 cup flour, ½ cup salt, ½ cup water, food colouring"},
+      {name:"Stacking Towers",time:"10 min",icon:"🏗️",desc:"Offer 4–6 duplo bricks or stackable cups. Stack two, then knock them down dramatically. Let her try. Celebrate the attempt as much as the achievement.",materials:"Duplo bricks, stackable cups, or wooden blocks"},
+      {name:"Pouring Practice",time:"10 min",icon:"🫗",desc:"Set up two containers and a small amount of water (or dry beans for less mess). Show her how to pour from one to the other. Put a towel under. She will want to do this one thousand times.",materials:"Two small containers, water or dry beans, towel underneath"},
+      {name:"Crayon Marks",time:"10 min",icon:"🖍️",desc:"Give her large chunky crayons (3–4 at most) on big paper. Don't show her how to draw. Just name the colours as she picks them up.",materials:"Large chunky crayons, A3 or larger paper"},
+    ],
+    watchFor:["Is she using a pincer grip (thumb and index finger) for small objects?","Can she stack 2–3 blocks before toppling?","Does she show persistence when something is difficult, or frustration?","Watch for hand preference emerging (though it may not be clear for another year)"],
+    milestones:["Beginning to use a spoon, however messily","Turning pages of a board book (multiple pages at once is normal)","Scribbling spontaneously with crayon","Building a tower of 2–3 blocks"],
+    adapt:"If fine motor skills feel delayed, prioritise pouring and squishing which require less precision. If she's ahead, introduce threading large beads onto a thick pipe cleaner — supervised closely."
+  },
+  { num:5, dates:"30 June – 6 July", theme:"Exploring the Natural World", age:"~16.5 months", color:"#5A7A5A", light:"#EDF4ED", focus:"Sensory Science",
+    intro:"Summer is your classroom this week. Nature offers the richest sensory curriculum money can't buy — texture, temperature, colour, smell, sound, and movement all at once. Go outside every day, even for fifteen minutes. Let her touch the earth.",
+    activities:[
+      {name:"Mud Kitchen",time:"20 min",icon:"🌱",desc:"A small tray of soil or mud with spoons, cups, and sticks. Let her dig, pour, mix, squish. This is sensory integration, fine motor work, and early scientific thinking all in one glorious mess. Clothes can be washed.",materials:"Tray or corner of garden, spoons, cups, sticks"},
+      {name:"Leaf Collection Walk",time:"20 min",icon:"🍃",desc:"Collect leaves together on a slow walk. Let her choose which ones to pick up. When home, lay them out and describe: 'this one is big', 'this one is rough', 'this one is yellow'. Make a simple collage.",materials:"Paper bag for collecting, PVA glue and paper for collage"},
+      {name:"Water Play",time:"15 min",icon:"💦",desc:"A washing-up bowl with a few inches of water, some cups and spoons, and a sunny spot. Pouring, splashing, floating objects — this is physics. Name what you observe: 'it floats!', 'all gone', 'empty, full'.",materials:"Washing-up bowl, water, cups, a few bath toys"},
+      {name:"Bug Hunt",time:"15 min",icon:"🐛",desc:"Search under rocks and leaves for woodlice, worms, beetles. Look together — you don't need to touch. 'Look at the worm! Long worm. It wiggles.' Curiosity about living things is a gift worth cultivating early.",materials:"Magnifying glass if available; mostly just eyes"},
+      {name:"Sensory Tray",time:"15 min",icon:"🪨",desc:"Fill a low tray with one natural material: grass clippings, sand, dried leaves, pebbles. Let her walk through it, run her hands through it. Name the sensation: 'rough', 'soft', 'scratchy', 'smooth'.",materials:"Low tray or box, one natural material per session"},
+    ],
+    watchFor:["Does she show natural curiosity, stopping to investigate rather than rushing past?","How does she respond to unexpected textures — curious, cautious, avoidant?","Does she use words or sounds to share discoveries with you?","Is she beginning to use a pointing finger consistently outdoors?"],
+    milestones:["Increased ability to walk on uneven surfaces","Growing vocabulary for describing the immediate environment","Beginning to imitate outdoor actions (sweeping, raking, watering)","Showing genuine excitement and re-engagement with familiar outdoor spaces"],
+    adapt:"If she's very tactile-sensitive, offer the material at a distance first, then use a spoon or tool to explore it. If she's a tactile adventurer, let her lead further into natural complexity."
+  },
+  { num:6, dates:"7–13 July", theme:"Early Empathy and Emotions", age:"~17 months", color:"#B05070", light:"#FCF0F2", focus:"Emotional Intelligence",
+    intro:"Emotional intelligence is built before children can name emotions. This week, you're laying the groundwork by naming feelings — yours, hers, and the doll's. Simple, warm, honest. Emotional vocabulary is the secret ingredient of every lifelong relationship she will have.",
+    activities:[
+      {name:"Feelings Faces",time:"10 min",icon:"😊",desc:"Draw or print four large simple faces: happy, sad, scared, surprised. Point to one and make the face yourself. Name it: 'happy face. Look, Daddy is happy!' Encourage her to try mimicking.",materials:"Drawn or printed emotion faces (large and simple)"},
+      {name:"Comfort the Bunny",time:"10 min",icon:"🐰",desc:"Use a soft toy and act out it being sad — slump it, make a gentle sad sound. Then say 'oh, Bunny is sad. Let's give Bunny a cuddle.' Guide her hands to cuddle it. This is empathy as an enacted skill.",materials:"Soft toy animal"},
+      {name:"Name That Feeling ⭐",time:"Ongoing",icon:"💛",desc:"When she gets frustrated, upset, or excited — name it in real time, warmly: 'you're angry because the block won't stack. That's frustrating.' Not fixing it, not dismissing it. Just naming it. This is the most important activity in the whole guide.",materials:"Just your presence and your words"},
+      {name:"Emotion Books",time:"10 min",icon:"📚",desc:"Find a simple picture book with expressive characters. Point to faces as you read: 'how does the bear feel? He looks worried.' Use exaggerated expression in your voice.",materials:"The Gruffalo, Where the Wild Things Are"},
+      {name:"Mirror Emotions",time:"5 min",icon:"🪞",desc:"Sit at the mirror together and make faces. Happy! Surprised! Silly! Sleepy! Keep it playful and never force a performance.",materials:"Large mirror"},
+    ],
+    watchFor:["Does she show concern when someone else appears hurt or upset?","Does she seek comfort from you when distressed?","Is she beginning to show pride in accomplishments?","Watch for social referencing — looking at your face to gauge your reaction"],
+    milestones:["Showing empathy behaviours such as offering comfort objects","Displaying a full range of basic emotions clearly","Beginning to understand consequences of actions on others' feelings","Using 'no' assertively and understanding simple emotional contexts"],
+    adapt:"If she's going through a big emotions phase right now, this week is exactly right. The naming and the presence is enough. If she seems emotionally flat or unresponsive to others' distress, mention this at your next health check."
+  },
+  { num:7, dates:"14–20 July", theme:"Music and Rhythm", age:"~17 months", color:"#6B5EA8", light:"#F0EEF9", focus:"Rhythm & Language Through Song",
+    intro:"The human brain is wired for rhythm before it is wired for language. Music activates more areas of the brain simultaneously than almost any other activity. This week, you're building language, mathematical thinking, memory, and coordination through the oldest human technology: song.",
+    activities:[
+      {name:"Homemade Band",time:"15 min",icon:"🥁",desc:"Make instruments together: fill a bottle with rice (shaker), bang on a pan with a wooden spoon (drum), stretch rubber bands across a box (guitar). Play together. There is no right or wrong sound.",materials:"Pots, spoons, boxes, bottles, rubber bands"},
+      {name:"Move to the Music",time:"15 min",icon:"🎵",desc:"Play songs with clear, varied tempos. Fast song: run and wiggle. Slow song: sway and float. Loud: stomp. Quiet: tippy-toe. Connecting sound to physical response is deep sensorimotor learning.",materials:"Music player, varied music"},
+      {name:"Clapping Patterns",time:"5 min",icon:"👏",desc:"Clap a simple two-beat pattern (clap clap... pause) and wait. If she tries to copy, build to three beats. Pattern recognition is the root of mathematical thinking.",materials:"Just your hands"},
+      {name:"Singing Story",time:"5 min",icon:"🎤",desc:"Take one of her favourite everyday routines — washing hands, putting on shoes — and make up a simple song for it. The sung routine is calming, predictable, and massively language-rich.",materials:"Just your voice"},
+      {name:"Freeze Dance",time:"10 min",icon:"🕺",desc:"Play music and dance. When you stop the music, freeze and make a frozen face. She won't get the concept immediately, but your frozen poses will delight her. This is early impulse control training in disguise.",materials:"Music player"},
+    ],
+    watchFor:["Does she sway, bounce, or move in response to music?","Can she attempt to clap a simple beat?","Does she show clear preferences for certain songs?","Listen for her beginning to hum or carry a melodic line, even approximately"],
+    milestones:["Spontaneous rhythmic movement to music","Beginning to fill in final words of familiar songs (pause and wait!)","Recognising familiar songs after just a few notes","Attempting to sing or hum independently"],
+    adapt:"If she's very sensitive to loud sounds, use softer instruments and quieter music. If she seems particularly musically engaged, introduce more complex rhythms and call-and-response singing. Either way, daily singing is medicine."
+  },
+  { num:8, dates:"21–27 July", theme:"Building and Constructing", age:"~17.5 months", color:"#1B3A5C", light:"#E8ECF4", focus:"Spatial Reasoning & Engineering",
+    intro:"Construction play is one of the first expressions of engineering thinking. It develops spatial reasoning, planning, cause-and-effect understanding, and persistence. When she builds and it falls, she's learning to iterate.",
+    activities:[
+      {name:"Block Town",time:"20 min",icon:"🏠",desc:"Build a simple arrangement of blocks together. Name what you're making: 'this is a house. Here's a door.' Let her knock it down — treat the demolition with equal celebration to the building. Both are learning.",materials:"Wooden unit blocks or large Duplo"},
+      {name:"Cardboard Box City",time:"20 min",icon:"📦",desc:"Save 3–4 cardboard boxes of various sizes. Let her stack, sit in, roll, and climb on them. Open the flaps to make 'doors'. Large-scale construction at this age is essential.",materials:"Cardboard boxes, tape if needed"},
+      {name:"Fill and Empty",time:"15 min",icon:"🪣",desc:"A large bin filled with dried pasta, rice, or sand. Give her cups, spoons, small containers. Filling and emptying is the 15–18 month schema — the developmental urge is real and needs honouring, not redirecting.",materials:"Large bin, dried pasta or rice or sand, assorted containers"},
+      {name:"Simple Nesting Cups",time:"10 min",icon:"🥤",desc:"Stacking cups that nest inside each other (or substitute kitchen bowls). Show how to nest smallest into largest. This teaches size sequencing — a genuine mathematical concept wrapped in irresistible physical play.",materials:"Nesting/stacking cups or kitchen bowls"},
+      {name:"Peg and Board",time:"10 min",icon:"🧩",desc:"Wooden peg puzzles with large chunky pegs. The aim-and-insert motion is precise motor work. Choose puzzles with no more than 4–6 pieces.",materials:"Wooden peg puzzle or commercial pegboard with large pegs"},
+    ],
+    watchFor:["Is she showing a clear filling/emptying or stacking/knocking schema?","Does she show persistence when a stack falls — does she try again?","Can she fit shapes or objects into corresponding spaces?","Watch for early problem-solving: does she try different approaches when one doesn't work?"],
+    milestones:["Stacking 3–5 blocks independently","Beginning to sort objects by simple properties","Showing clear intent before an action (planning)","Ability to sustain focus on a challenging task for 3–5 minutes"],
+    adapt:"If frustration overwhelms her during construction, scaffold more — build together, celebrate each addition. If she's breezing through puzzles and blocks, introduce simple shape sorters with 4–6 different shapes. The sweet spot is always at the edge of her current competence."
+  },
+  { num:9, dates:"28 July – 3 Aug", theme:"Stories and Books", age:"~18 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Reading Habit & Literacy Foundation",
+    intro:"Eighteen months is a landmark. She's probably doubled her vocabulary in recent weeks. Now is the time to build an even richer relationship with books — not as instructional tools, but as shared worlds you enter together. The habit of daily reading you build this week can last a lifetime.",
+    activities:[
+      {name:"Book Corner",time:"Setup",icon:"📚",desc:"Create a permanent, accessible book corner: a low shelf or basket with 6–8 board books at her height. She should be able to choose her own book to bring to you. Ownership and choice are part of the reading relationship.",materials:"Low shelf or basket, 6–8 age-appropriate board books"},
+      {name:"Predictive Reading",time:"10 min",icon:"🔮",desc:"When reading a familiar book, pause before a word she knows and wait. 'The bear went to sleep in his...' Look at her expectantly. This pause teaches prediction — a higher-order reading skill that starts here.",materials:"A favourite familiar board book"},
+      {name:"Act It Out",time:"10 min",icon:"🎭",desc:"After reading a simple story, re-enact it with toys or your hands. 'The bunny hopped' — hop a stuffed bunny across the floor. This deepens comprehension and narrative understanding.",materials:"Familiar board book, soft toys"},
+      {name:"Make Your Own Book",time:"15 min",icon:"📝",desc:"Fold 4 pieces of paper together to make a small book. Draw (or print) pictures of her day: wake up, breakfast, play, bath, bed. Seeing her own life narrated is deeply validating and builds sequence understanding.",materials:"Paper, pen or marker, photos optional"},
+      {name:"Library Trip",time:"1 hour",icon:"🏛️",desc:"Visit the library this week. Let her choose one or two books herself. The act of browsing, choosing, and carrying her own book is a language and literacy experience in itself.",materials:"Library card, good intentions"},
+    ],
+    watchFor:["Is she bringing books to you to read?","Does she point at pictures and look at your face for confirmation?","Can she complete familiar phrases in books you repeat often?","Is she turning pages with more control?"],
+    milestones:["At 18 months, 50+ word vocabulary is typical (though range is wide)","Beginning to name pictured objects in books spontaneously","Sustaining interest in a shared book for 5–8 minutes","Requesting re-reading of favourite books (the best sign of all)"],
+    adapt:"If books hold her attention for only a minute or two, keep sessions very short and very interactive — act things out, make sounds, put the book down without fuss. If she's highly engaged and turning pages independently, explore longer simple narrative books."
+  },
+  { num:10, dates:"4–10 Aug", theme:"Colours and Sorting", age:"~18 months", color:"#D97706", light:"#FEF3C7", focus:"Colour Recognition & Categorisation",
+    intro:"Colour recognition is a cognitive skill that develops between 18 and 24 months. At this stage, she may know one or two colours by name. This week is not a test — it's a warm introduction. Sort things by colour, name colours in context, and let her discover that the world has a vocabulary beyond 'that'.",
+    activities:[
+      {name:"Colour Basket Sort",time:"10 min",icon:"🎨",desc:"Get 3 small coloured containers (red, blue, yellow) and gather small objects in those colours: a red block, a blue lid, a yellow spoon. Sort them together, naming the colour each time. Do it every day.",materials:"3 small coloured containers, 6–9 small objects in matching colours"},
+      {name:"Colour of the Day",time:"Ongoing",icon:"🌈",desc:"Pick one colour each morning and announce it. Then hunt for that colour all day: 'your red cup. A red tomato. The red postbox.' Immersive colour focus outperforms any flashcard programme.",materials:"Nothing — just your eyes and narration"},
+      {name:"Colour Mixing",time:"10 min",icon:"🧪",desc:"Fill an ice cube tray with water. Add red food colouring to some, yellow to others. Give her a dropper or spoon to combine them. 'Red and yellow made orange!' Pure magic at this age, and genuine early science.",materials:"Ice cube tray, food colouring, dropper or small spoon"},
+      {name:"Rainbow Collage",time:"20 min",icon:"🌸",desc:"Collect items in one colour this week — leaves, petals, paper scraps, fabric offcuts. Glue them onto paper. The sorting, choosing, and organising is as valuable as the final product.",materials:"PVA glue, paper, collected items in a single colour"},
+      {name:"Coloured Scarves",time:"10 min",icon:"🧣",desc:"A set of lightweight coloured scarves (or cut fabric squares). Float them in the air, sort them, hide under them, name them. Movement plus colour plus vocabulary equals learning she won't forget.",materials:"5–6 lightweight scarves or fabric squares in different colours"},
+    ],
+    watchFor:["Can she hand you a named colour from a small set?","Does she attempt to say any colour names?","Is she starting to group objects by some visible property?","Notice whether she shows a clear colour preference in play choices"],
+    milestones:["Typically recognising and naming 1–2 colours correctly at 18 months","Beginning to sort by colour with guidance","Using descriptive language beyond just naming objects","Growing use of adjectives in speech"],
+    adapt:"Don't be concerned if colour naming is inconsistent — it's genuinely hard and develops slowly. The language exposure is what matters now. If she already names 3–4 colours accurately, introduce shape vocabulary alongside colour: 'a red circle'."
+  },
+  { num:11, dates:"11–17 Aug", theme:"The World of Pretend", age:"~18.5 months", color:"#B05070", light:"#FCF0F2", focus:"Symbolic & Imaginative Play",
+    intro:"Somewhere around 18 months, the imaginary begins. A block becomes a phone. A stick becomes a spoon. This is one of the most significant cognitive leaps of early childhood — the ability to use one thing to represent another. Welcome to the world of symbolic thinking. It's the beginning of everything.",
+    activities:[
+      {name:"Dolls Tea Party",time:"15 min",icon:"🫖",desc:"Set up a simple tea party with a few cups and a doll. Pour 'tea', pass a 'biscuit', make the doll sip. Keep your own role lightly playful — follow her lead. You're scaffolding pretend play, not directing a scene.",materials:"Small cups, doll or stuffed animals, perhaps an old cloth as tablecloth"},
+      {name:"Real Object Play",time:"15 min",icon:"📱",desc:"Give her real (but safe) household objects for play: an old phone, a set of keys, a wooden spoon, a small bag. Real objects invite richer pretend play than replicas because they carry authentic meaning she's observed.",materials:"Old (non-working) phone, keys, bag, wooden spoon"},
+      {name:"Shop Play",time:"15 min",icon:"🛒",desc:"Set up a simple 'shop' with a few items on a low shelf. Give her a basket and play as customer or shopkeeper. 'How much for this apple? Here you go. Thank you!' Model it warmly and wait.",materials:"A few items, a basket, possibly pretend coins (large buttons work)"},
+      {name:"Puppet Play",time:"10 min",icon:"🧦",desc:"Make a simple sock puppet or use a stuffed animal as a puppet. Have the puppet greet her, ask her name, offer her a snack. A voice coming from an object often unlocks language she doesn't produce in normal conversation.",materials:"Sock puppet or stuffed animal used as puppet"},
+      {name:"Box as Everything",time:"20 min",icon:"📦",desc:"Offer a medium cardboard box with no instructions. Watch what it becomes. A car? A boat? A bed? Follow her lead and play alongside. When she decides what it is, join that world completely.",materials:"Medium cardboard box"},
+    ],
+    watchFor:["Is she initiating pretend play independently, or only imitating you?","Does she involve you in her play narratively?","Can she sustain a pretend scenario for more than one action?","Watch for her using objects as substitutes for other objects"],
+    milestones:["Emergence of symbolic play (one object represents another)","Beginning multi-step pretend sequences","Increasing interest in imitating adult roles and routines","Growing narrative language even if single words: 'sleeping', 'eating', 'driving'"],
+    adapt:"If pretend play hasn't clicked yet, model it more richly yourself without expectation — play out a scene with toys while she watches. The seed is planted. If she's already building elaborate scenarios, introduce small-world play: a mat with simple figures, trees, a house."
+  },
+  { num:12, dates:"18–24 Aug", theme:"Movement and Coordination", age:"~19 months", color:"#5A7A5A", light:"#EDF4ED", focus:"Gross Motor & Body Awareness",
+    intro:"By 19 months, most children are running, though elegantly is still a few months away. This week focus on the full body — proprioception (where am I in space?), bilateral coordination (using both sides of the body together), and balance. Every tumble is data.",
+    activities:[
+      {name:"Obstacle Course",time:"20 min",icon:"🏃",desc:"Build a simple indoor course: crawl under a table, step over a pillow, climb onto a cushion, walk along a line of tape. Navigate it together. Repeat it. Vary it each day.",materials:"Pillows, tape on floor, low furniture, cushions"},
+      {name:"Ball Skills",time:"15 min",icon:"⚽",desc:"Kick a large soft ball. Roll it back and forth. Try to catch it (she won't yet, but the attempt matters). Throw it at a target — a washing basket works perfectly.",materials:"Large soft ball, washing basket as target"},
+      {name:"Balance Beam",time:"10 min",icon:"🤸",desc:"Lay a strip of tape on the floor or use a plank of wood elevated on books. Walk along the beam heel-to-toe. Hold her hand at first, then encourage her to go alone.",materials:"Masking tape on floor, or a wooden plank"},
+      {name:"Dance and Freeze",time:"10 min",icon:"🕺",desc:"Call out movements: 'jump like a frog', 'stomp like an elephant', 'tiptoe like a mouse', 'spin like a top'. She will follow your physical model enthusiastically.",materials:"Music player, open space"},
+      {name:"Ramp Play",time:"15 min",icon:"🛝",desc:"Create a simple ramp with a board propped on books. Roll cars, balls, even fruit down it. Vary the angle. 'Steep ramp: the ball goes fast. Gentle ramp: it goes slow.'",materials:"Plank or cardboard, books to prop it, rolling objects"},
+    ],
+    watchFor:["Is she running with increasing confidence?","Does she attempt to kick a stationary ball?","Can she climb up stairs holding a rail or your hand?","Watch for her beginning to jump with both feet, even if she doesn't leave the ground yet"],
+    milestones:["Running (though with frequent tumbles)","Kicking a ball forward","Carrying objects while walking","Beginning to walk up stairs with support"],
+    adapt:"If she's very cautious about physical challenges, bring the challenge to her comfort level and build in tiny successes. Cautious movers are often very observant — they watch before they leap, which is a strength."
+  },
+  { num:13, dates:"25–31 Aug", theme:"The Language of More", age:"~19 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Two-Word Combinations",
+    intro:"This week we deepen language work with a focus on two-word combinations, which typically emerge between 18 and 24 months. We're also building comprehension — understanding more complex instructions, questions, and descriptions.",
+    activities:[
+      {name:"Two-Word Modelling",time:"Ongoing",icon:"💬",desc:"When she says a single word, expand it by one word and repeat it warmly: she says 'ball', you say 'big ball', 'red ball', 'throw ball'. This technique (expansion) is one of the most evidence-backed language teaching methods that exists.",materials:"Just your voice"},
+      {name:"Simple Question Games",time:"10 min",icon:"❓",desc:"Ask questions with visible answers: 'where is your nose?' 'where's the dog?' 'which is big?' Get in the habit of asking rather than telling, then pausing genuinely for her answer.",materials:"Nothing extra needed"},
+      {name:"Category Sorting",time:"10 min",icon:"🗂️",desc:"Sort toys into categories: animals here, vehicles there. Name each category: 'all the animals. This is an animal. And this one.' She's beginning to understand that things belong to groups.",materials:"Mixed toys, two containers or mat areas"},
+      {name:"Preposition Play",time:"10 min",icon:"📦",desc:"Use a small toy and a box: 'put the bear IN the box. Now ON the box. Now UNDER the box. Where's the bear? He's BEHIND the box!' Prepositions are harder than they look — they are genuine language concepts.",materials:"Small toy, a box"},
+      {name:"Narrated Routines",time:"10 min",icon:"🥪",desc:"Choose one daily routine and narrate it step by step, using sequence words: 'first we get the bread. Next the butter. Then we spread it. Last we cut it in half.'",materials:"Any daily routine"},
+    ],
+    watchFor:["Is she attempting two-word combinations?","Does she follow two-step instructions?","Is she asking questions — even one-word versions: 'that?' 'more?' 'why?'","Listen for her beginning to use pronouns, especially 'me' and 'mine'"],
+    milestones:["Two-word combinations typically emerge 18–24 months","Understanding of simple prepositions (in, on)","Beginning to use 'me', 'mine', and occasionally 'I'","Asking for items by name or with pointing plus a word"],
+    adapt:"If single words are still coming slowly, keep the expansion technique going — one word at a time. If she's already combining two words confidently, begin modelling three-word phrases and introduce why questions."
+  },
+  { num:14, dates:"1–7 Sept", theme:"Numbers Begin", age:"~19.5 months", color:"#D97706", light:"#FEF3C7", focus:"Early Numeracy & Quantity",
+    intro:"Early numeracy is not about counting to ten like a party trick. It's about the concept of quantity — more, less, one, many, big, small. This week you're building the number sense that underlies all future mathematical thinking. Do it playfully, do it briefly, and do it every single day.",
+    activities:[
+      {name:"Counting Everything",time:"Ongoing",icon:"🔢",desc:"Count everything in context: steps on the stairs, grapes on the plate, blocks in a pile. Point to each as you count. She won't understand cardinal counting yet, but the rhythm and one-to-one correspondence are going in.",materials:"Everything around you"},
+      {name:"More and Less",time:"Ongoing",icon:"➕",desc:"During snack: 'do you want more? Here's more raisins. All gone! No more.' These words (more, less, all gone, empty, full) are the vocabulary of early quantity understanding.",materials:"Snack time"},
+      {name:"Big and Small",time:"10 min",icon:"🔍",desc:"Find paired objects in dramatically different sizes: a big spoon and a tiny spoon, a large ball and a small one. Compare them side by side, naming 'big' and 'little/small' repeatedly.",materials:"Paired objects of different sizes"},
+      {name:"Number Songs",time:"5 min",icon:"🎵",desc:"'Five Little Ducks', 'Ten Green Bottles', 'One Two Three Four Five, Once I Caught a Fish Alive'. Use your fingers as you sing. The songs build number sequence through melody.",materials:"Just your voice and fingers"},
+      {name:"Grouping Play",time:"10 min",icon:"🚗",desc:"Put 3 cars together and 1 car alone. 'This group has LOTS of cars. This one only has ONE.' Use natural language around quantity: 'one for you, one for me. Now we both have one.'",materials:"Any small collection of objects"},
+    ],
+    watchFor:["Does she use 'more' consistently and meaningfully?","Does she understand 'one' as distinct from 'many'?","Can she follow instructions involving quantity ('give me two')?","Is she beginning to spontaneously count, even if the sequence is wrong?"],
+    milestones:["Solid understanding of 'more' and 'all gone'","Reciting number words in sequence (though not yet accurately counting objects)","Beginning to understand 'one' as a specific quantity","Interest in quantity-related play (filling, sorting, grouping)"],
+    adapt:"If counting and quantity language seem abstract to her right now, bring it entirely into snack and mealtime context — this is where quantity is most meaningful."
+  },
+  { num:15, dates:"8–14 Sept", theme:"Self-Care and Independence", age:"~20 months", color:"#5A7A5A", light:"#EDF4ED", focus:"Independence & Capability",
+    intro:"The drive for independence at this age is not defiance — it's development. When she says 'me do it' for the fifteenth time while you're trying to get out of the door, she is doing exactly what she should be. This week, slow down and let her.",
+    activities:[
+      {name:"Dressing Practice",time:"15 min",icon:"👕",desc:"Lay out clothes and let her attempt to pull on a sock, push arms through sleeves, pull up trousers. Use clothes slightly larger than needed for ease. Sit behind her for assistance, not in front — keep her in the driver's seat.",materials:"Easy-access clothing: elasticated waists, slip-on shoes"},
+      {name:"Spoon Mastery",time:"Mealtime",icon:"🥣",desc:"Give her a spoon and food with a thick consistency (yogurt, oatmeal, mashed potato). Yes, there will be mess. A towel underneath and a bib solve most of this. Let her attempt without correcting grip or angle.",materials:"Spoon, thick-consistency food, towel and bib"},
+      {name:"Washing Hands Ritual",time:"5 min",icon:"🧼",desc:"Teach hand-washing as a complete, independent sequence: turn on tap, wet hands, soap, scrub, rinse, turn off tap, dry. Use a step stool so she can reach. Sing a song to time it.",materials:"Step stool for sink, soap, towel"},
+      {name:"Tidying Time",time:"10 min",icon:"🧹",desc:"Make tidying up a daily ritual at a specific time — not a punishment but a satisfying conclusion to play. Use song: 'tidy up, tidy up, everybody tidy up.' Specific containers for specific things makes it achievable.",materials:"Clearly labelled storage bins or baskets"},
+      {name:"Simple Chores",time:"10 min",icon:"🛍️",desc:"Carry a small bag of shopping. Help load the washing. Wipe the table with a cloth. She wants to do what you do. These tiny responsibilities build executive function, belonging, and pride.",materials:"Small bag, real (safe) household items"},
+    ],
+    watchFor:["Is she attempting to dress or undress herself?","Does she show frustration when you help without being asked?","Is she using the word 'no' or 'mine' with increasing confidence?","Watch for her completing familiar routines independently before you prompt"],
+    milestones:["Strong 'me do it' drive emerging","Beginning to use spoon/fork with increasing success","Able to remove simple clothing items (hat, shoes, socks)","Completing familiar sequences with minimal prompts (washing hands, tidying)"],
+    adapt:"If she's very resistant to learning self-care skills, remove the pressure entirely and just model them yourself. If she's ahead, introduce more complex sequences: pouring her own drink from a small pitcher, washing fruit, setting a placemat."
+  },
+  { num:16, dates:"15–21 Sept", theme:"Shapes and Spaces", age:"~20 months", color:"#6B5EA8", light:"#F0EEF9", focus:"Spatial Reasoning & Shape Recognition",
+    intro:"Spatial thinking — understanding how objects relate to each other in space — is a mathematical skill that plays out through physical play long before a child can name a shape. This week balances shape recognition with the spatial vocabulary that makes sense of the world.",
+    activities:[
+      {name:"Shape Hunt",time:"15 min",icon:"🔍",desc:"Walk through the house identifying shapes: 'the window is a rectangle. The clock is a circle. This book is a rectangle too!' Shapes in the real environment are more meaningful than shapes on flashcards.",materials:"Nothing — just your observing eyes"},
+      {name:"Shape Sorter Play",time:"10 min",icon:"⭕",desc:"A classic shape sorter with circle, square, and triangle. Don't help immediately when she gets stuck — count to five first. The problem-solving process is the learning, not the completion.",materials:"Shape sorter toy (4–6 shapes maximum)"},
+      {name:"Pasta Shape Art",time:"20 min",icon:"🍝",desc:"Give her pasta in different shapes (penne, rigatoni, farfalle) and PVA glue on cardboard. Let her arrange and stick them freely. Name the shapes as she works.",materials:"Dried pasta in varied shapes, PVA glue, cardboard"},
+      {name:"Tunnels and Through",time:"15 min",icon:"🕳️",desc:"Make tunnels from boxes, blankets over chairs, rolled mats. Crawl through together, naming: 'we're going THROUGH the tunnel. We're INSIDE the tunnel. Now we're OUT the other side.'",materials:"Blankets, chairs, cardboard boxes"},
+      {name:"Drawing Shapes",time:"10 min",icon:"✏️",desc:"Draw simple shapes on large paper and name them as you draw. Then let her try. She won't produce recognisable shapes — she'll scribble — and that is precisely correct.",materials:"Paper, chunky crayons or markers"},
+    ],
+    watchFor:["Can she match one shape to its hole or outline?","Is she using spatial language: in, out, through, under, over?","Does she show interest in fitting objects into spaces?","Watch for her beginning to draw with more intentionality"],
+    milestones:["Identifying at least 1 shape by name (circle is typically first)","Strong interest in fitting, nesting, and sorting activities","Beginning to use spatial prepositions correctly","Increasing deliberateness in mark-making"],
+    adapt:"If shape naming is confusing, stay with circle and square for now — two is enough. If she's already naming several shapes, introduce size variations: big circle and small circle."
+  },
+  { num:17, dates:"22–28 Sept", theme:"Seasons and Change", age:"~20.5 months", color:"#D97706", light:"#FEF3C7", focus:"Science & Observation",
+    intro:"Autumn is the most tangible season for young children — colours change, leaves fall, the air shifts. This week, use what autumn hands you for free. Science, vocabulary, sensory exploration, and a growing understanding that the world moves in patterns.",
+    activities:[
+      {name:"Leaf Colour Study",time:"20 min",icon:"🍂",desc:"Collect leaves in autumn colours and lay them on a white surface. Name each colour: red, orange, yellow, brown, green. Sort by colour. Crinkle them. Crush them. Smell them.",materials:"Collected autumn leaves"},
+      {name:"Seed and Harvest",time:"20 min",icon:"🌾",desc:"If possible, harvest something from a garden (even a pot of herbs or a tomato plant). Let her pull, pick, or dig. Connecting food to growing things is one of the most important early science lessons.",materials:"Garden or pot plant with harvestable item"},
+      {name:"Weather Watching",time:"5 min",icon:"🌤️",desc:"Each morning, look out the window together: 'what's the weather like today? It's cloudy. Is it warm or cold? Let's feel the air.' A daily weather ritual builds observation habits and weather vocabulary.",materials:"A window; perhaps a simple weather chart on the wall"},
+      {name:"Autumn Sensory Tray",time:"15 min",icon:"🌰",desc:"Fill a tray with: conkers, acorns, dried leaves, small twigs, seed pods. Let her explore freely. Name everything. Count the conkers. Sort by size.",materials:"Autumn natural items in a tray"},
+      {name:"Nature Journal",time:"10 min",icon:"📔",desc:"Begin a simple nature journal: a small book where each day you stick one natural find (a leaf, a feather, a petal) and draw or write one word beside it. A ritual and a record.",materials:"Small notebook, glue, pen or crayon"},
+    ],
+    watchFor:["Does she notice seasonal changes in the environment?","Is she beginning to use weather vocabulary?","Does she ask questions about the natural world?","Watch for her making connections: 'leaf fall' linking to the tree"],
+    milestones:["Growing ability to connect cause and effect in natural observations","Vocabulary for weather, seasons, and natural objects expanding","Increasing interest in the living world","Beginning to ask 'what's that?' constantly — this is a developmental explosion, embrace it"],
+    adapt:"If your setting doesn't have easy outdoor access, bring autumn in: a bowl of seasonal items from a market or park works. If she's very engaged with nature, introduce more complex vocabulary (deciduous, hibernation) as a gift."
+  },
+  { num:18, dates:"29 Sept – 5 Oct", theme:"Art and Creative Expression", age:"~21 months", color:"#B05070", light:"#FCF0F2", focus:"Process Art & Creativity",
+    intro:"Art at this age is not about producing pretty pictures. It's about process: the feeling of paint on hands, the satisfaction of a mark, the surprise of colours mixing. Keep your own aesthetic preferences out of the activity. The point is not the product — the process is the lesson.",
+    activities:[
+      {name:"Finger Painting",time:"20 min",icon:"👆",desc:"Lay paper on a low surface or directly on a tray. Finger paint, palm print, drag fingers. Name what she does: 'you made a line! Round and round. Your whole hand!' Offer only 2–3 colours to start.",materials:"Non-toxic finger paint, large paper or tray liner"},
+      {name:"Natural Printing",time:"15 min",icon:"🍃",desc:"Dip leaves, vegetables (potato, celery end, pepper half), and textured objects in paint and press onto paper. Name what you used: 'the leaf made this print.'",materials:"Paint, various natural and household objects for printing, paper"},
+      {name:"Chalk Outdoors",time:"15 min",icon:"🖍️",desc:"Large sidewalk chalk on paving or a dark board. Trace around her hands and feet. Draw a circle and let her 'decorate' it. Outside scale makes everything feel bigger and freer.",materials:"Chunky sidewalk chalk, outdoor surface"},
+      {name:"Collage Making",time:"20 min",icon:"✂️",desc:"Give her a variety of materials: torn paper, fabric scraps, cotton wool, foil, dried leaves. PVA glue on a piece of card. Let her choose and place freely. No composition direction.",materials:"PVA glue, card, mixed media materials (fabric, foil, paper scraps)"},
+      {name:"Water Painting",time:"10 min",icon:"🖌️",desc:"On a warm day, give her a bucket of water and a wide paintbrush. Let her 'paint' the fence, the paving, the wall. The marks appear and disappear — impermanence with no mess.",materials:"Bucket of water, wide paintbrush"},
+    ],
+    watchFor:["Is she beginning to make intentional marks (a specific line, a repeated pattern)?","Does she describe what she's making, even if the description doesn't match the image?","How long does she sustain engagement in an open-ended creative activity?","Watch for her beginning to name her works afterward"],
+    milestones:["Intentional scribbling and mark-making","Beginning to name drawings, even post-hoc","Showing clear aesthetic preferences (colour choices, media choices)","Increasing fine motor control visible in artwork"],
+    adapt:"If she finds unstructured art overwhelming, offer one colour at a time and one tool. If she's highly expressive and engages for long periods, introduce more complex media: watercolours, clay, collage with more varied textures."
+  },
+  { num:19, dates:"6–12 Oct", theme:"Animals and Empathy", age:"~21 months", color:"#5A7A5A", light:"#EDF4ED", focus:"Empathy & Classification",
+    intro:"Animals are one of the great portals into empathy for young children. They are interesting, relatable, and safe to practise caring for. This week uses animals as a vehicle for vocabulary expansion, empathy building, classification thinking, and pure childhood delight.",
+    activities:[
+      {name:"Animal Sorting Game",time:"15 min",icon:"🦁",desc:"Gather plastic or toy animals and sort by type: farm animals, wild animals, sea animals, pets. The conversation around each animal is the learning. 'Does the lion live on a farm? No — where does it live?'",materials:"Collection of toy or plastic animals"},
+      {name:"Animal Care Play",time:"15 min",icon:"🏥",desc:"Set up a 'vet clinic' or 'animal care station' with soft toys as patients. Bandage a paw, check a temperature, give a cuddle. Caregiving play deepens empathy and introduces health vocabulary.",materials:"Soft toy animals, bandages (can be fabric strips), a spoon as 'medicine'"},
+      {name:"Animal Sounds Book",time:"10 min",icon:"📖",desc:"Read or make a book focused entirely on animal sounds and movements. Act out each one together. 'The elephant goes stomp stomp stomp. The frog goes hop hop hop.' Full body language learning.",materials:"Animal sounds book, space to move"},
+      {name:"Live Animal Visit",time:"Outing",icon:"🐄",desc:"If possible: a petting farm, a garden robin, watching a dog in the park, visiting a pet shop. Live animals at this age are electrifying. Observe closely, narrate gently, never force closeness.",materials:"Wherever real animals can be observed safely"},
+      {name:"Animal Habitats",time:"20 min",icon:"🌍",desc:"Using a tray or box, create a simple habitat: blue fabric for the ocean, green fabric for the forest, a sand section for the desert. Place animals in their habitats.",materials:"Tray, coloured fabric or paper, toy animals"},
+    ],
+    watchFor:["Does she use animal names correctly and consistently?","Does she show genuine empathy in animal play — concern for a sick or hurt animal?","Is she beginning to group animals by shared characteristics?","Watch for her asking 'why' questions about animals"],
+    milestones:["Naming many animals accurately","Understanding that different animals need different care/environments","Using animal play to explore empathy and care narratives","Beginning to ask questions about the natural world"],
+    adapt:"If she's animal-obsessed (many children are at this age), lean all the way in — more habitat play, more vet play, more animal books. A deep interest is a learning highway."
+  },
+  { num:20, dates:"13–19 Oct", theme:"Building a Reading Habit", age:"~21 months", color:"#1B3A5C", light:"#E8ECF4", focus:"Literacy Habit Formation",
+    intro:"By 21 months, a child who has been read to consistently is carrying thousands of words in their comprehension bank. This week, build the reading ritual itself — the time, the place, the feeling. The books are almost secondary.",
+    activities:[
+      {name:"Morning Book",time:"10 min",icon:"☀️",desc:"Establish a morning book ritual: one book together right after breakfast, every day this week. Same spot, same time, her choice of book. Ritual and repetition are the architecture of habit.",materials:"A low book shelf accessible to her"},
+      {name:"Bedtime Story Ritual",time:"10 min",icon:"🌙",desc:"If not already established: one book at bedtime, every night. Children read to at bedtime enter school with dramatically different literacy foundations.",materials:"2–3 calm, familiar books for bedtime"},
+      {name:"Library Haul",time:"Outing",icon:"🏛️",desc:"Visit the library and return with 5–6 new books. Let her carry them home. New books keep the reading ritual fresh — variety feeds engagement.",materials:"Library card"},
+      {name:"Book Talking",time:"5 min",icon:"💬",desc:"After a reading, close the book and ask: 'what was your favourite part?' Accept any response — a pointed finger, a sound, a word. Build book discussion habits now, when the stakes are low.",materials:"A familiar book"},
+      {name:"Re-Reading on Demand",time:"Ongoing",icon:"🔄",desc:"When she wants the same book for the seventh consecutive day: read it. Re-reading a loved book is the deepest form of comprehension building. Every re-read, she notices something new.",materials:"Whatever book she is obsessed with this week"},
+    ],
+    watchFor:["Is she independently selecting books?","Does she re-tell any stories through play or narration?","Is she pointing at pictures and labelling them spontaneously?","Watch for her 'reading' to her toys — narrating a book from memory"],
+    milestones:["Beginning to read (narrate) familiar books from memory","Pointing to and naming pictured objects confidently","Showing clear emotional responses to story events","Asking to be read to, unprompted"],
+    adapt:"If she's resisting sitting for books, go shorter — one page, one picture, one word. Warmth and brevity beat length and obligation every time. If she's showing early pre-reading behaviours, begin pointing to the first letter of her name on the page."
+  },
+  { num:21, dates:"20–26 Oct", theme:"Cooking and the Kitchen", age:"~21.5 months", color:"#D97706", light:"#FEF3C7", focus:"Real-World Learning",
+    intro:"The kitchen is the best classroom in the house. Measuring is maths. Mixing is science. Following a recipe is sequencing. Eating what you've made is a lesson in pride and nourishment. Bring her into it. Accept the mess.",
+    activities:[
+      {name:"Baking Together",time:"30 min",icon:"🍞",desc:"Make a simple recipe where she can do real things: pour a cup of flour, stir the mixture, press a cookie cutter. Narrate every step. This is maths (measuring), science (heat changes things), and language all at once.",materials:"Simple recipe — banana bread or simple cookies work well"},
+      {name:"Fruit & Veg Exploration",time:"10 min",icon:"🥦",desc:"Before preparing any fruit or vegetable, give it to her whole first. Feel it, smell it, knock on it. Name it. What colour? What shape? Is it rough or smooth? Then prepare it together.",materials:"Variety of fresh fruit and vegetables"},
+      {name:"Pouring and Measuring",time:"10 min",icon:"🫗",desc:"Give her a small jug of water and measuring cups. Let her pour freely, transferring water between containers. Name quantities: 'one cup, two cups. The big cup holds more. The small cup holds less.'",materials:"Measuring cups, small jug, tray to contain the mess"},
+      {name:"Washing Produce",time:"10 min",icon:"🚿",desc:"Give her a bowl of water and some vegetables or fruit to wash. Real work, real responsibility, real sense of contribution. A simple task she can genuinely complete.",materials:"Bowl of water, produce to wash, towel"},
+      {name:"Taste Exploration",time:"10 min",icon:"👅",desc:"Offer small tastes of new foods alongside familiar ones. Name the taste: 'sour — like lemon. Sweet — like the apple. Salty — like the cracker.' Taste vocabulary is often overlooked and richly developmental.",materials:"Small amounts of varied foods"},
+    ],
+    watchFor:["Does she show pride when contributing to food preparation?","Is she becoming more adventurous with tastes?","Does she follow the sequence of a simple routine like washing hands before cooking?","Watch for her beginning to help prepare her meal space"],
+    milestones:["Growing ability to follow multi-step instructions in sequence","Increasing patience during activities that take time","Strong desire to participate in adult tasks","Beginning to understand that food comes from ingredients and processes"],
+    adapt:"If the kitchen causes anxiety (too many sensory inputs), start with a single quiet activity — just washing vegetables at a bowl outside. If she loves it and wants more, teach her to crack an egg. Supervised, it's completely age-appropriate and deeply satisfying."
+  },
+  { num:22, dates:"27 Oct – 2 Nov", theme:"More Words, Bigger World", age:"~22 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Language Explosion",
+    intro:"By 22 months, a language explosion may be fully underway — many children this age are acquiring new words every day. The gap between what she understands and what she can produce is still wide, but you should be seeing longer utterances, more questions, and the beginnings of real storytelling.",
+    activities:[
+      {name:"Question Flood",time:"Ongoing",icon:"❓",desc:"This week, ask more questions than usual. Make them real: 'where do you think the cat went?' 'what should we have for breakfast?' 'why is the sky blue today?' The expectation that she will answer is itself a language invitation.",materials:"Just your voice"},
+      {name:"Describe and Find",time:"10 min",icon:"🔍",desc:"Describe an object without naming it: 'it's round, it bounces, it's red — go and find it.' Start with obvious two-feature descriptions. This builds listening comprehension, categorisation, and vocabulary retrieval.",materials:"Familiar household objects"},
+      {name:"Story Starters",time:"10 min",icon:"📖",desc:"Begin a very simple story and let her contribute: 'once there was a little bear. One day she went to the...' Pause and look at her. Accept any response — a single word, a point, a sound — and build the story from it.",materials:"Just imagination"},
+      {name:"Voice Messages",time:"5 min",icon:"📱",desc:"Record a simple voice message for a grandparent or family member. Let her speak into the phone. The idea that her voice reaches people she loves is profound.",materials:"Phone or voice recorder"},
+      {name:"Feelings Journal",time:"5 min",icon:"📔",desc:"Each evening, chat briefly about one feeling from the day: 'today you felt happy at the park. And a bit frustrated with the puzzle.' Simple emotional narration builds the vocabulary and the habit of reflection.",materials:"Just conversation; optionally a small notebook"},
+    ],
+    watchFor:["Is she producing 3-word utterances?","Does she use 'why', 'what', and 'where' questions?","Is she using pronouns (I, me, you, mine) more consistently?","Watch for her beginning to describe things without being prompted"],
+    milestones:["Typical 22-month vocabulary: 50–200+ words","Three-word sentences beginning to emerge","Using language to express needs, emotions, and observations","Beginning to tell rudimentary stories with a beginning and middle"],
+    adapt:"Language over-regularisation errors (goed, comed, eated) are a sign of sophisticated grammar learning — DO NOT correct them; simply model the correct form warmly in your response."
+  },
+  { num:23, dates:"3–9 Nov", theme:"Problem Solving and Thinking", age:"~22 months", color:"#6B5EA8", light:"#F0EEF9", focus:"Cognitive Flexibility",
+    intro:"Cognitive flexibility — the ability to try more than one approach when the first doesn't work — is one of the most important skills a person can develop. This week you're not solving problems for her. You're staying close while she solves them herself.",
+    activities:[
+      {name:"Simple Puzzles",time:"10 min",icon:"🧩",desc:"4–6 piece puzzles with knob handles. When she gets stuck, resist immediately helping. Count silently to five. If she looks at you, try: 'hmm, I wonder if you could turn it?' rather than showing.",materials:"Simple knob puzzles, 4–8 pieces maximum"},
+      {name:"Cause and Effect Toys",time:"10 min",icon:"⚙️",desc:"Pop-up toys, wind-up mechanisms, simple lever toys. Let her figure out the mechanism. Don't demonstrate first — let her find the cause by exploring the effect.",materials:"Wind-up toy, pop-up toy, jack-in-the-box"},
+      {name:"Problem Puzzles in Play",time:"15 min",icon:"🔓",desc:"Set up a gentle problem: a favourite toy just out of reach, requiring her to use a stool or ask for help. A container with a tight lid. A ball that rolled behind something.",materials:"Naturally occurring problems in the environment"},
+      {name:"If-Then Thinking",time:"Ongoing",icon:"💡",desc:"Narrate cause-and-effect relationships constantly: 'if you push the button, the light comes on. If we water the plant, it stays green. If you let go of the cup, it falls.' This is the language of logic.",materials:"Everyday objects and observations"},
+      {name:"Sorting with Rules",time:"10 min",icon:"🗂️",desc:"Set up a sorting task with a rule: 'all the red things here, all the blue things there.' Then change the rule: 'now all the small things here.' Switching rules is cognitively demanding and precisely what she's ready for.",materials:"Mixed objects, sorting containers"},
+    ],
+    watchFor:["Does she try more than one approach when something doesn't work?","Does she use you as a resource — asking for help when stuck?","Is she beginning to anticipate outcomes ('if I do this...')?","Watch for her explaining her reasoning, even in partial language"],
+    milestones:["Using tools to solve problems (stool to reach, stick to retrieve)","Demonstrating persistence across multiple attempts","Beginning to understand and narrate cause and effect","Using language to think aloud: 'no fit... turn...'"],
+    adapt:"If frustration overwhelms before problem-solving begins, the challenge is too steep — simplify. If she solves things almost immediately, increase complexity. The sweet zone is a few minutes of genuine effort before success. That's where the growth happens."
+  },
+  { num:24, dates:"10–16 Nov", theme:"Early Mark-Making and Pre-Writing", age:"~22 months", color:"#1B3A5C", light:"#E8ECF4", focus:"Pre-Writing Foundation",
+    intro:"Pre-writing is not writing. It's the physical and perceptual foundations on which writing will eventually be built: lines, circles, direction, intention, grip. Don't rush to letters. Build the hand strength, the control, and the joyful relationship with making marks.",
+    activities:[
+      {name:"Controlled Line Drawing",time:"10 min",icon:"✏️",desc:"Draw a simple dotted line across paper and let her try to follow it with a crayon. Use very few dots and make the path wide. This is not about accuracy — it's about the concept of following a path intentionally.",materials:"Paper with dotted lines, chunky crayons"},
+      {name:"Playdough Snakes and Balls",time:"15 min",icon:"🟤",desc:"Roll long snakes and round balls with playdough. These motions — rolling back and forth, rolling in circles — are the same hand motions used in writing strokes. Repetitive, satisfying, and genuinely pre-writing.",materials:"Playdough"},
+      {name:"Chalkboard Marks",time:"10 min",icon:"🖊️",desc:"A blackboard or chalkboard at her height. Give her a stick of chalk and let her cover it in marks. The vertical surface is better for developing the hand position needed for writing.",materials:"Blackboard or large piece of dark paper, chalk"},
+      {name:"Sand Writing",time:"10 min",icon:"🏖️",desc:"Fill a tray with fine sand. Use a finger to draw simple lines and circles. Erase and start again. The impermanence removes pressure; the texture adds sensory richness.",materials:"Tray with fine sand"},
+      {name:"Name Introduction",time:"5 min",icon:"🏷️",desc:"Begin casually writing her name in large letters when you draw together. 'This is your name. This is how we write [name].' Point to the first letter. No expectation of recognition yet — just a warm introduction.",materials:"Paper, marker"},
+    ],
+    watchFor:["Is she holding writing tools with increasing control?","Does she make purposeful, intentional marks rather than just random scribbling?","Is she showing interest in the marks and letters adults make?","Watch for her attempting to 'write' in play — making marks on paper and calling it something"],
+    milestones:["Holding a crayon with some finger control (not just full fist)","Drawing horizontal and vertical lines with intent","Beginning circular scribbles","Showing interest in adults' writing and attempting to imitate it"],
+    adapt:"If grip is still very whole-fist, focus on playdough strength building and finger isolation games. If she's showing interest in letters, begin pointing to the letters in her name by name as you write them."
+  },
+  { num:25, dates:"17–23 Nov", theme:"Playing Together and Apart", age:"~22.5 months", color:"#B05070", light:"#FCF0F2", focus:"Social Play & Turn-Taking",
+    intro:"As she approaches two, the social landscape is changing. She may be more interested in other children, more aware of how play works in groups, and also more fiercely independent. This week focuses on social play — the rules, the repairs, and the rich complexity of playing alongside and with another person.",
+    activities:[
+      {name:"Parallel Play Observation",time:"20 min",icon:"👧",desc:"If she has regular contact with another toddler, set up parallel play: two sets of similar materials, side by side, no expectation of sharing yet. Narrate what each child is doing. Parallel play is developmentally correct and rich at this age.",materials:"Two sets of similar toys placed nearby"},
+      {name:"Turn-Taking Games",time:"15 min",icon:"🎲",desc:"Simple toddler games introduce waiting for your turn. Narrate: 'my turn. Now your turn. You wait. Now you go.' Make waiting a named, managed experience.",materials:"Simple toddler game or homemade card matching game"},
+      {name:"Conflict Narration",time:"Ongoing",icon:"🤝",desc:"When a conflict arises, narrate it without shaming: 'you wanted that toy. She had it. That felt hard. Let's find another one.' You're modelling conflict resolution in real time.",materials:"Real life"},
+      {name:"Cooperative Building",time:"15 min",icon:"🏗️",desc:"Build something together with a clear joint goal: 'let's build the tallest tower we can.' Take turns adding blocks. Celebrate collectively. 'WE built it!'",materials:"Blocks or duplo"},
+      {name:"Role Play Family",time:"15 min",icon:"🏠",desc:"Play family with stuffed toys. 'Who is the mummy bear? Who is the baby? What does the baby need?' Family play at this age is how children process social roles, attachment relationships, and security.",materials:"Stuffed toys, perhaps small dolls"},
+    ],
+    watchFor:["Is she aware of and interested in what other children are doing?","Does she show any spontaneous sharing or turn-taking?","How does she respond when play goes wrong — does she seek adult help or try to resolve?","Watch for empathy in play: noticing when a toy friend is 'sad'"],
+    milestones:["Parallel play developing into brief moments of cooperative play","Beginning to understand the concept of taking turns","Showing awareness of social rules, even without following them","Using language to manage social situations: 'mine', 'no', 'please', 'give'"],
+    adapt:"If social play is very difficult for her, reduce the complexity — one-to-one with you rather than other children, smaller turn-taking loops. If she's socially confident and engaged with peers, she's ready for more group activities."
+  },
+  { num:26, dates:"24–30 Nov", theme:"A Full World of Words", age:"~23 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Conversation & Narrative",
+    intro:"One month before her second birthday. By now, the language journey you've been on together has filled her with a working vocabulary she uses every day. This week is about celebrating how far she has come and pushing joyfully into the next layer: narrative, description, and the first real conversations.",
+    activities:[
+      {name:"Conversation Corner",time:"10 min",icon:"💬",desc:"Each morning, have a brief, real conversation — not about logistics, but about her: 'what shall we do today? What was your favourite thing yesterday? What do you like better, apples or oranges?' Listen fully. Let her lead the thread.",materials:"Just your undivided attention"},
+      {name:"Story Retelling",time:"10 min",icon:"📖",desc:"After reading a favourite book, put it down and say: 'you tell me the story.' Accept any contribution — a sound, a word, pointing at the closed book. Build around what she offers. This is the birth of literary narration.",materials:"Familiar favourite book"},
+      {name:"Photo Album Language",time:"15 min",icon:"📸",desc:"Look through a photo album or phone photos together. 'Who is this? What is happening here? Where are we? You were so little! Look at you now!' Photos are a language-rich window into memory, self, and relationship.",materials:"Photos — printed or digital"},
+      {name:"Descriptive Language Games",time:"10 min",icon:"🔍",desc:"Play 'I spy' with descriptions, not letters: 'I spy something round and yellow... that you can eat.' Accept any guess generously and build toward the answer together.",materials:"The visible environment"},
+      {name:"Thank You Ritual",time:"5 min",icon:"💛",desc:"Begin a simple daily gratitude practice: 'what was one good thing today?' She may say one word: 'dog' or 'cake'. That is a complete answer. The habit of noticing good things is one of the most powerful things you can build.",materials:"Just a quiet moment each evening"},
+    ],
+    watchFor:["Is she holding real back-and-forth conversations?","Can she retell a simple story or describe a recent event?","Is she using past tense, even if incorrectly ('I goed', 'he falled')?","Watch for her talking to herself during play — the beginning of inner speech"],
+    milestones:["200+ words in vocabulary is typical by 23 months (though range is wide)","Most two-word and many three-word utterances","Beginning past tense (often over-regularised: 'eated', 'goed')","Talking during independent play"],
+    adapt:"Language over-regularisation errors are a sign of sophisticated grammar learning — do not correct them; model the correct form warmly. If vocabulary is still lower than expected, bring it up at the two-year check — but keep talking, reading, and singing regardless."
+  },
+  { num:27, dates:"1–7 Dec", theme:"Celebrations and Traditions", age:"~23 months", color:"#D97706", light:"#FEF3C7", focus:"Ritual, Community & Belonging",
+    intro:"December brings ritual, and ritual is one of the great gifts of early childhood. Predictable, repeated, meaningful events teach children about time, family, community, belonging, and the pattern of the year. Whatever you celebrate, the point is participation, wonder, and the warm knowledge that this family does certain things together.",
+    activities:[
+      {name:"Decoration Making",time:"30 min",icon:"✨",desc:"Make simple decorations together: paper chains, salt-dough ornaments, painted pine cones. Let her choose colours, place things where she wants, take pride in her contribution to the home's appearance.",materials:"Paper, paint, salt dough (1 cup flour, ½ cup salt, ½ cup water), natural items"},
+      {name:"Seasonal Book Collection",time:"Daily",icon:"📚",desc:"Pull out or borrow seasonal books — whatever your tradition. Read them repeatedly. Familiar seasonal books carry enormous emotional weight and build temporal awareness: 'we read this every December'.",materials:"Seasonal books from library or collection"},
+      {name:"Gift Wrapping Together",time:"20 min",icon:"🎁",desc:"Involve her in wrapping gifts (holding the tape, placing the bow, drawing on the paper). 'This is for grandma. You're giving her something — that's a kind thing to do.'",materials:"Wrapping paper, tape, simple gifts"},
+      {name:"Cooking for Others",time:"30 min",icon:"🍪",desc:"Make something edible together that will be given to someone else: biscuits, a loaf of bread. Making something with your own hands to give away is a profound early lesson in generosity.",materials:"Baking ingredients, packaging"},
+      {name:"Light Exploration",time:"15 min",icon:"🕯️",desc:"Walk at dusk to see lights. Make a simple lantern from a jar. Talk about light in the dark. Candles, fairy lights, a torch in a dark room — light is magical at this age.",materials:"Jar lantern, safe candle or battery tea light, torch"},
+    ],
+    watchFor:["Is she showing anticipatory excitement about upcoming events?","Does she talk about family members and relationships?","Can she express preferences for activities, foods, and people?","Watch for her beginning to understand giving something to another person"],
+    milestones:["Understanding of anticipation (something is coming)","Ability to talk about family members and relationships","Beginning to delay gratification (not all children can yet)","Rich pretend play incorporating real-world events and traditions"],
+    adapt:"If the sensory overload of the festive season is hard for her (some children find this period overwhelming), protect quiet time at home. A calm, consistent daily rhythm is the best gift you can give during a busy season."
+  },
+  { num:28, dates:"8–31 Dec", theme:"Looking Back, Leaning Forward", age:"~23 months", color:"#1B3A5C", light:"#E8ECF4", focus:"Reflection & Celebration",
+    intro:"The final weeks of the year are not a curriculum — they are a celebration. You have given your daughter a remarkable year of play, language, exploration, movement, art, music, wonder, and loving presence. This is the season to reflect, enjoy, and let her simply be.",
+    activities:[
+      {name:"Year in Photos",time:"20 min",icon:"📸",desc:"Look through the year's photos together. Name what you see: activities, places, people, seasons. 'There you are in summer! And the leaves! You have grown SO much.' This builds autobiographical memory and a narrative sense of self.",materials:"Phone or printed photos from the year"},
+      {name:"Favourite Things Revisit",time:"Morning",icon:"⭐",desc:"Spend one morning revisiting her very favourite activities from the year — whichever two or three she lights up most about. Knowing your child's particular joys is the most important curriculum knowledge of all.",materials:"Whatever she loves most"},
+      {name:"Free Days",time:"Open",icon:"🌈",desc:"Give several completely unstructured mornings. No agenda, no activity, just available space and time and materials. Watch what she invents. By now, she has the inner resources to direct her own play meaningfully.",materials:"Her favourite toys, open space, your presence"},
+      {name:"Reading Marathon",time:"Open",icon:"📚",desc:"Spend long, unhurried stretches reading together. Go deep into books you've both loved. Let her take control of the pacing. This is the reading relationship in its purest form.",materials:"Her favourite books from the year"},
+      {name:"Birthday Planning",time:"10 min",icon:"🎂",desc:"Begin planning her second birthday together: 'your birthday is coming. You are going to be TWO. What kind of cake shall we have? Who shall we invite?' Let her participate in the imagining.",materials:"A calendar, her imagination"},
+    ],
+    watchFor:["How differently does she play and communicate compared to June?","What are her strongest current interests and competencies?","How does she manage her emotions compared to six months ago?","What is the quality of your relationship — the ease and joy of your days together?"],
+    milestones:["By 24 months: typically 50–300 words, 2–3 word utterances, running confidently, drawing circles, engaging in pretend play, showing empathy, using 'I' and 'me'","Deep wellbeing markers: secure attachment, curiosity, persistence, delight in learning","The quality of a child's play is the most reliable indicator of their development at this age","You, the present and engaged father, are her most important developmental tool"],
+    adapt:"These final weeks are not about adaptation. They are about appreciation. You know her better than any guide does. Trust yourself. You've spent a year paying close attention to who she is — and that is the whole work of early childhood education."
+  },
+];
+
+const RHYTHM = [
+  {icon:"📖",label:"Morning Book",detail:"10 min · her choice"},
+  {icon:"🌳",label:"Outdoor Time",detail:"Every day"},
+  {icon:"🎯",label:"Activity",detail:"15–30 min max"},
+  {icon:"🥣",label:"Meal Talk",detail:"Narrate & connect"},
+  {icon:"🎨",label:"Free Play",detail:"Follow her lead"},
+  {icon:"🌙",label:"Bedtime Story",detail:"Non-negotiable"},
+];
+
+const DOCS = [
+  {name:"Complete Curriculum Guide",desc:"Full 28-week guide from 15 months to 2 years",icon:"📋",color:"#2A7B8C",tag:"Full Guide"},
+  {name:"Daily Rhythm Reference",desc:"Morning book · Outdoor · Activity · Meals · Bedtime",icon:"🌅",color:"#D97706",tag:"Quick Ref"},
+  {name:"Developmental Milestones",desc:"Month-by-month markers for 15–24 months",icon:"📊",color:"#6B5EA8",tag:"Reference"},
+  {name:"Activity Materials List",desc:"Complete prep list for all 28 weeks",icon:"🛒",color:"#5A7A5A",tag:"Checklist"},
+  {name:"Milestone Tracker",desc:"Track her progress week by week",icon:"⭐",color:"#B05070",tag:"Tracker"},
+];
+
+const HELP_REPLIES = [
+  w=>`For "${w.theme}", the key thing to remember is that her engagement is the signal. If she's lighting up, lean in. If she's not, follow her somewhere else — the developmental work still happens.`,
+  ()=>"The most important thing you can do any day this week is narrate what she's doing in simple sentences. That language bath is building vocabulary she'll use for years.",
+  ()=>"Trust the slow. Some weeks she'll seem to have leapt forward overnight; others nothing seems to be happening. Both are normal. Development consolidates in rest as much as in activity.",
+  w=>`The adapt section for Week ${w.num} is worth re-reading — it's the most personalised guidance in the week. You know her best; use those notes as a starting point, not a prescription.`,
+  ()=>"You're doing brilliantly. Showing up every day and paying attention — that is the whole curriculum. Everything else is useful scaffolding around that central fact.",
+  ()=>"If something isn't landing this week, skip it completely and come back next week. There's nothing in this guide that can't wait seven days. Her wellbeing today is the priority.",
+  ()=>"Remember: repetition is learning at this age. When she wants to do the same activity for the fifth day running, that's not boredom — that's consolidation. Let her lead.",
+];
+
+// ─── State ────────────────────────────────────────────────────────────────────
+const getInitialWeek = () => {
+  const june2 = new Date(2025, 5, 2);
+  const diff = Math.floor((Date.now() - june2) / (7*24*60*60*1000));
+  return Math.max(0, Math.min(diff, WEEKS.length-1));
+};
+
+let state = {
+  screen: "home",
+  weekIdx: getInitialWeek(),
+  tab: "activities",
+  overlay: null, // "weeks"|"help"|"notes"
+  helpMsgs: [{from:"guide",text:"Hello! I'm here to help you with the curriculum. Ask me about any activity, what to expect this week, how to adapt something, or anything about your daughter's development. 👶"}],
+  helpInput: "",
+  noteText: "",
+  showBanner: !localStorage.getItem("banner_dismissed"),
+};
+
+// ─── Render ───────────────────────────────────────────────────────────────────
+const app = document.getElementById("app");
+
+function render() {
+  const w = WEEKS[state.weekIdx];
+  document.documentElement.style.setProperty("--week-color", w.color);
+
+  const headerGrad = `linear-gradient(135deg, ${w.color} 0%, #1B3A5C 100%)`;
+
+  app.innerHTML = `
+    ${state.showBanner ? `
+    <div class="install-banner" id="banner">
+      <p id="banner-text">📲 Add to your home screen for the full app experience</p>
+      <button id="install-btn" style="display:none">Install</button>
+      <button class="dismiss" id="dismiss-btn">✕</button>
+    </div>` : ""}
+
+    <!-- Main screens -->
+    <div id="main-area" style="flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column;">
+
+      ${state.screen === "home" ? `
+      <div class="screen" id="home-screen">
+        <!-- Week header -->
+        <div class="week-header" style="background:${headerGrad};">
+          <div class="header-row">
+            <div>
+              <div class="label">Growing Up Wonderful</div>
+              <div class="title">Week ${w.num} · ${w.age}</div>
+              <div class="sub">${w.dates}</div>
+            </div>
+            <button class="week-btn" onclick="openOverlay('weeks')">All Weeks ▾</button>
+          </div>
+          <div class="theme">${w.theme}</div>
+          <div class="badge">Focus: ${w.focus}</div>
+        </div>
+
+        <!-- Daily rhythm -->
+        <div class="rhythm-wrap">
+          <div class="rhythm-label">Today's Rhythm</div>
+          <div class="rhythm-row">
+            ${RHYTHM.map(r=>`
+              <div class="rhythm-card">
+                <div class="ri">${r.icon}</div>
+                <div class="rl">${r.label}</div>
+                <div class="rd">${r.detail}</div>
+              </div>`).join("")}
+          </div>
+        </div>
+
+        <!-- Intro card -->
+        <div class="intro-card" style="background:${w.light};border-left-color:${w.color};">
+          <div class="ic-label" style="color:${w.color};">This Week</div>
+          <div class="ic-text">${w.intro}</div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+          ${[["activities","Activities"],["observe","Watch For"],["milestones","Milestones"],["adapt","Adapt"]].map(([id,label])=>`
+            <button class="tab-btn${state.tab===id?" active":""}" style="${state.tab===id?`color:${w.color}`:""}" onclick="setTab('${id}')">${label}</button>
+          `).join("")}
+        </div>
+
+        <!-- Tab content -->
+        ${state.tab === "activities" ? `
+        <div class="activity-list">
+          ${w.activities.map((a,i)=>`
+            <div class="act-card">
+              <div class="act-top">
+                <div class="act-icon" style="background:${w.light};">${a.icon}</div>
+                <div>
+                  <div class="act-name">${a.name}</div>
+                  <div class="act-time" style="color:${w.color};">${a.time}</div>
+                </div>
+              </div>
+              <div class="act-desc">${a.desc}</div>
+              <div class="act-mat">
+                <span class="act-mat-label">MATERIALS: </span>
+                <span class="act-mat-text">${a.materials}</span>
+              </div>
+            </div>
+          `).join("")}
+        </div>` : ""}
+
+        ${state.tab === "observe" ? `
+        <div class="info-card">
+          <div class="info-title" style="color:${w.color};">What to Watch For</div>
+          ${w.watchFor.map((item,i)=>`
+            <div class="info-item">
+              <div class="info-num" style="background:${w.light};color:${w.color};">${i+1}</div>
+              <div class="info-text">${item}</div>
+            </div>
+          `).join("")}
+        </div>` : ""}
+
+        ${state.tab === "milestones" ? `
+        <div class="info-card">
+          <div class="info-title" style="color:#D97706;">Developmental Markers</div>
+          ${w.milestones.map(m=>`
+            <div class="info-item">
+              <span style="font-size:16px;flex-shrink:0;">⭐</span>
+              <div class="info-text">${m}</div>
+            </div>
+          `).join("")}
+          <div class="milestone-note"><strong>Remember:</strong> Milestones are averages, not deadlines. The range of typical development is enormous.</div>
+        </div>` : ""}
+
+        ${state.tab === "adapt" ? `
+        <div class="adapt-card">
+          <div class="adapt-title">
+            <span style="font-size:20px;">🌱</span>
+            <span style="font-size:13px;font-weight:700;color:#5A7A5A;">Adapting to Your Child</span>
+          </div>
+          <div class="adapt-text">${w.adapt}</div>
+        </div>
+        <div class="principle-card">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;">
+            <span style="font-size:20px;">🧭</span>
+            <span style="font-size:13px;font-weight:700;color:#374151;">Core Principle</span>
+          </div>
+          <div class="principle-text">"Follow the child. The weekly theme is a suggestion, not an obligation. If she's obsessed with water pouring and ignores your planned activity, teach through water pouring."</div>
+        </div>` : ""}
+      </div>` : ""}
+
+      ${state.screen === "docs" ? `
+      <div class="screen" id="docs-screen">
+        <div class="week-header" style="background:linear-gradient(135deg,#1B3A5C 0%,#2A7B8C 100%);">
+          <div class="label">Growing Up Wonderful</div>
+          <div class="title">Documents</div>
+          <div class="sub">Everything in one place. One tap to open.</div>
+        </div>
+        <div class="doc-list">
+          ${DOCS.map(d=>`
+            <div class="doc-card">
+              <div class="doc-icon" style="background:${d.color}18;">${d.icon}</div>
+              <div style="flex:1;min-width:0;">
+                <div class="doc-name">${d.name}</div>
+                <div class="doc-desc">${d.desc}</div>
+              </div>
+              <div class="doc-tag" style="background:${d.color}15;color:${d.color};">${d.tag}</div>
+            </div>
+          `).join("")}
+          <div class="doc-add">
+            <div style="font-size:28px;margin-bottom:8px;">📎</div>
+            <div style="font-size:14px;font-weight:600;color:#374151;margin-bottom:3px;">Add Document</div>
+            <div style="font-size:12px;color:#9CA3AF;">Tap to upload a Word document or PDF</div>
+          </div>
+        </div>
+      </div>` : ""}
+
+      <!-- Overlays -->
+      ${state.overlay === "weeks" ? `
+      <div class="overlay">
+        <div class="overlay-header" style="background:linear-gradient(135deg,#1B3A5C 0%,#2A7B8C 100%);">
+          <div>
+            <div class="label">Navigate</div>
+            <div class="title">All 28 Weeks</div>
+          </div>
+          <button class="close-btn" onclick="closeOverlay()">✕</button>
+        </div>
+        <div class="week-list">
+          ${WEEKS.map((wk,i)=>`
+            <button class="week-item${state.weekIdx===i?" active":""}"
+              style="${state.weekIdx===i?`background:${wk.light};border-color:${wk.color};border-width:2px;`:""}"
+              onclick="selectWeek(${i})">
+              <div class="week-num" style="background:${wk.color};">${wk.num}</div>
+              <div class="week-info">
+                <div class="week-info-name">${wk.theme}</div>
+                <div class="week-info-sub">${wk.dates} · ${wk.age}</div>
+              </div>
+              ${state.weekIdx===i?`<span style="color:${wk.color};font-size:18px;font-weight:800;">✓</span>`:""}
+            </button>
+          `).join("")}
+        </div>
+      </div>` : ""}
+
+      ${state.overlay === "help" ? `
+      <div class="overlay">
+        <div class="overlay-header" style="background:linear-gradient(135deg,#5A7A5A 0%,#2A7B8C 100%);">
+          <div>
+            <div class="label">On-demand</div>
+            <div class="title">Help & Chat</div>
+          </div>
+          <button class="close-btn" onclick="closeOverlay()">✕</button>
+        </div>
+        <div class="chat-body" id="chat-body">
+          ${state.helpMsgs.map(m=>`
+            <div class="chat-msg ${m.from}">${m.text}</div>
+          `).join("")}
+        </div>
+        <div class="chat-input-row">
+          <input class="chat-input" id="chat-input" type="text" placeholder="Ask about this week, an activity, milestones..." value="${state.helpInput.replace(/"/g,'&quot;')}" oninput="state.helpInput=this.value" onkeydown="if(event.key==='Enter')sendHelp()"/>
+          <button class="chat-send" onclick="sendHelp()">↑</button>
+        </div>
+      </div>` : ""}
+
+      ${state.overlay === "notes" ? `
+      <div class="overlay">
+        <div class="overlay-header" style="background:linear-gradient(135deg,#B05070 0%,#6B5EA8 100%);">
+          <div>
+            <div class="label">Week ${w.num}</div>
+            <div class="title">My Notes</div>
+          </div>
+          <button class="close-btn" onclick="closeOverlay()">✕</button>
+        </div>
+        <div class="notes-body">
+          <div class="notes-hint">What did you notice this week? What worked? What surprised you?</div>
+          <textarea class="notes-ta" id="notes-ta" placeholder="Jot down observations, things she loved, adaptations you made, milestones you noticed..." oninput="state.noteText=this.value">${state.noteText}</textarea>
+          <button class="notes-save" style="background:#B05070;" onclick="saveNote()">Save Note</button>
+        </div>
+      </div>` : ""}
+
+    </div><!-- /main-area -->
+
+    <!-- FAB -->
+    ${!state.overlay ? `<button class="fab" onclick="openOverlay('help')">💬</button>` : ""}
+
+    <!-- Bottom nav -->
+    <nav class="bottom-nav">
+      <button class="nav-btn" onclick="setScreen('home')">
+        <span class="nav-icon">📅</span>
+        <span class="nav-label${state.screen==="home"?" active":""}">This Week</span>
+      </button>
+      <button class="nav-btn" onclick="setScreen('docs')">
+        <span class="nav-icon">📄</span>
+        <span class="nav-label${state.screen==="docs"?" active":""}">Documents</span>
+      </button>
+      <button class="nav-btn" onclick="openOverlay('notes')">
+        <span class="nav-icon">✏️</span>
+        <span class="nav-label">Notes</span>
+      </button>
+    </nav>
+  `;
+
+  // Scroll chat to bottom
+  const chatBody = document.getElementById("chat-body");
+  if (chatBody) chatBody.scrollTop = chatBody.scrollHeight;
+
+  // Restore textarea
+  const ta = document.getElementById("notes-ta");
+  if (ta) ta.value = state.noteText;
+
+  // Install banner logic
+  setupBanner();
+}
+
+// ─── Actions ──────────────────────────────────────────────────────────────────
+function setScreen(s) { state.screen = s; state.overlay = null; render(); }
+function setTab(t) { state.tab = t; render(); window.scrollTo(0,0); const el = document.getElementById("home-screen"); if(el) el.scrollTo(0,0); }
+function openOverlay(o) { state.overlay = o; render(); }
+function closeOverlay() { state.overlay = null; render(); }
+function selectWeek(i) { state.weekIdx = i; state.overlay = null; state.tab = "activities"; state.screen = "home"; render(); }
+
+function sendHelp() {
+  const input = document.getElementById("chat-input");
+  const msg = (input ? input.value : state.helpInput).trim();
+  if (!msg) return;
+  state.helpMsgs.push({from:"user", text:msg});
+  state.helpInput = "";
+  render();
+  setTimeout(() => {
+    const w = WEEKS[state.weekIdx];
+    const fn = HELP_REPLIES[Math.floor(Math.random()*HELP_REPLIES.length)];
+    state.helpMsgs.push({from:"guide", text:fn(w)});
+    render();
+  }, 700);
+}
+
+function saveNote() {
+  const ta = document.getElementById("notes-ta");
+  if (ta) state.noteText = ta.value;
+  const key = `note_week_${state.weekIdx}`;
+  try { localStorage.setItem(key, state.noteText); } catch(e) {}
+  // Flash save confirmation
+  const btn = document.querySelector(".notes-save");
+  if (btn) { btn.textContent = "Saved ✓"; btn.style.background="#5A7A5A"; setTimeout(()=>{ btn.textContent="Save Note"; btn.style.background="#B05070"; },1500); }
+}
+
+// ─── Install banner ───────────────────────────────────────────────────────────
+let deferredPrompt = null;
+
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const btn = document.getElementById("install-btn");
+  const txt = document.getElementById("banner-text");
+  if (btn && txt) {
+    txt.textContent = "📲 Install as an app on your phone";
+    btn.style.display = "block";
+  }
+});
+
+function setupBanner() {
+  const dismissBtn = document.getElementById("dismiss-btn");
+  if (dismissBtn) dismissBtn.onclick = () => {
+    localStorage.setItem("banner_dismissed","1");
+    state.showBanner = false;
+    render();
+  };
+  const installBtn = document.getElementById("install-btn");
+  if (installBtn) installBtn.onclick = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const {outcome} = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      if (outcome === "accepted") { state.showBanner = false; render(); }
+    }
+  };
+}
+
+// ─── Service Worker ───────────────────────────────────────────────────────────
+if ("serviceWorker" in navigator) {
+  const swCode = `
+    const CACHE="guw-v1";
+    self.addEventListener("install",e=>{self.skipWaiting();});
+    self.addEventListener("activate",e=>{self.clients.claim();});
+    self.addEventListener("fetch",e=>{
+      if(e.request.method!=="GET")return;
+      e.respondWith(
+        caches.open(CACHE).then(cache=>
+          cache.match(e.request).then(hit=>{
+            const net=fetch(e.request).then(res=>{
+              if(res&&res.status===200)cache.put(e.request,res.clone());
+              return res;
+            });
+            return hit||net;
+          })
+        )
+      );
+    });
+  `;
+  const blob = new Blob([swCode], {type:"application/javascript"});
+  const swUrl = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).catch(()=>{});
+}
+
+// ─── Boot ─────────────────────────────────────────────────────────────────────
+render();
+</script>
+</body>
+</html>
