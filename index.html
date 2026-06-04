@@ -6,10 +6,10 @@
 <meta name="theme-color" content="#1B3A5C"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-<meta name="apple-mobile-web-app-title" content="Growing Up"/>
+<meta name="apple-mobile-web-app-title" content="Naomi"/>
 <meta name="mobile-web-app-capable" content="yes"/>
-<meta name="description" content="Week-by-week home curriculum for your daughter — 15 months to 2 years."/>
-<title>Growing Up Wonderful</title>
+<meta name="description" content="Naomi Yusuff's home curriculum — 15 months to 2 years."/>
+<title>Naomi Yusuff — Growing Up Wonderful</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
   html,body{height:100%;background:#F7F9FC;overscroll-behavior:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}
@@ -131,7 +131,15 @@
 </style>
 </head>
 <body>
-<div id="app"></div>
+<div id="splash" style="position:fixed;inset:0;background:linear-gradient(135deg,#1B3A5C 0%,#2A7B8C 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;color:white;text-align:center;padding:40px;">
+  <div style="font-size:56px;margin-bottom:16px;">👶</div>
+  <div style="font-size:13px;letter-spacing:3px;text-transform:uppercase;opacity:.7;margin-bottom:8px;font-weight:600;">Growing Up Wonderful</div>
+  <div style="font-size:36px;font-weight:800;margin-bottom:6px;">Naomi Yusuff</div>
+  <div style="font-size:16px;opacity:.8;margin-bottom:40px;">15 months → 2 years</div>
+  <button onclick="document.getElementById('splash').style.display='none'" style="background:white;color:#1B3A5C;border:none;border-radius:14px;padding:14px 36px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.2);">Let's Go 🌱</button>
+  <div style="font-size:12px;opacity:.5;margin-top:20px;">For Joshua & Naomi's mum</div>
+</div>
+<div id="app"></div><script>if(sessionStorage.getItem("splash_seen")){document.addEventListener("DOMContentLoaded",()=>{const s=document.getElementById("splash");if(s)s.style.display="none";});}else{document.addEventListener("DOMContentLoaded",()=>{const btn=document.querySelector("#splash button");if(btn)btn.addEventListener("click",()=>sessionStorage.setItem("splash_seen","1"));});}</script>
 
 <script>
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -394,7 +402,7 @@ const WEEKS = [
     ],
     watchFor:["Is she independently selecting books?","Does she re-tell any stories through play or narration?","Is she pointing at pictures and labelling them spontaneously?","Watch for her 'reading' to her toys — narrating a book from memory"],
     milestones:["Beginning to read (narrate) familiar books from memory","Pointing to and naming pictured objects confidently","Showing clear emotional responses to story events","Asking to be read to, unprompted"],
-    adapt:"If she's resisting sitting for books, go shorter — one page, one picture, one word. Warmth and brevity beat length and obligation every time. If she's showing early pre-reading behaviours, begin pointing to the first letter of her name on the page."
+    adapt:"If she's resisting sitting for books, go shorter — one page, one picture, one word. Warmth and brevity beat length and obligation every time. If she's showing early pre-reading behaviours, begin pointing to the N in Naomi on the page."
   },
   { num:21, dates:"20–26 Oct", theme:"Cooking and the Kitchen", age:"~21.5 months", color:"#D97706", light:"#FEF3C7", focus:"Real-World Learning",
     intro:"The kitchen is the best classroom in the house. Measuring is maths. Mixing is science. Following a recipe is sequencing. Eating what you've made is a lesson in pride and nourishment. Bring her into it. Accept the mess.",
@@ -442,11 +450,11 @@ const WEEKS = [
       {name:"Playdough Snakes and Balls",time:"15 min",icon:"🟤",desc:"Roll long snakes and round balls with playdough. These motions — rolling back and forth, rolling in circles — are the same hand motions used in writing strokes. Repetitive, satisfying, and genuinely pre-writing.",materials:"Playdough"},
       {name:"Chalkboard Marks",time:"10 min",icon:"🖊️",desc:"A blackboard or chalkboard at her height. Give her a stick of chalk and let her cover it in marks. The vertical surface is better for developing the hand position needed for writing.",materials:"Blackboard or large piece of dark paper, chalk"},
       {name:"Sand Writing",time:"10 min",icon:"🏖️",desc:"Fill a tray with fine sand. Use a finger to draw simple lines and circles. Erase and start again. The impermanence removes pressure; the texture adds sensory richness.",materials:"Tray with fine sand"},
-      {name:"Name Introduction",time:"5 min",icon:"🏷️",desc:"Begin casually writing her name in large letters when you draw together. 'This is your name. This is how we write [name].' Point to the first letter. No expectation of recognition yet — just a warm introduction.",materials:"Paper, marker"},
+      {name:"Name Introduction",time:"5 min",icon:"🏷️",desc:"Begin casually writing her name in large letters when you draw together. 'This is your name. This is how we write Naomi.' Point to the first letter. No expectation of recognition yet — just a warm introduction.",materials:"Paper, marker"},
     ],
     watchFor:["Is she holding writing tools with increasing control?","Does she make purposeful, intentional marks rather than just random scribbling?","Is she showing interest in the marks and letters adults make?","Watch for her attempting to 'write' in play — making marks on paper and calling it something"],
     milestones:["Holding a crayon with some finger control (not just full fist)","Drawing horizontal and vertical lines with intent","Beginning circular scribbles","Showing interest in adults' writing and attempting to imitate it"],
-    adapt:"If grip is still very whole-fist, focus on playdough strength building and finger isolation games. If she's showing interest in letters, begin pointing to the letters in her name by name as you write them."
+    adapt:"If grip is still very whole-fist, focus on playdough strength building and finger isolation games. If she's showing interest in letters, begin pointing to the letters in Naomi's name as you write them: 'N for Naomi'."
   },
   { num:25, dates:"17–23 Nov", theme:"Playing Together and Apart", age:"~22.5 months", color:"#B05070", light:"#FCF0F2", focus:"Social Play & Turn-Taking",
     intro:"As she approaches two, the social landscape is changing. She may be more interested in other children, more aware of how play works in groups, and also more fiercely independent. This week focuses on social play — the rules, the repairs, and the rich complexity of playing alongside and with another person.",
@@ -488,7 +496,7 @@ const WEEKS = [
     adapt:"If the sensory overload of the festive season is hard for her (some children find this period overwhelming), protect quiet time at home. A calm, consistent daily rhythm is the best gift you can give during a busy season."
   },
   { num:28, dates:"8–31 Dec", theme:"Looking Back, Leaning Forward", age:"~23 months", color:"#1B3A5C", light:"#E8ECF4", focus:"Reflection & Celebration",
-    intro:"The final weeks of the year are not a curriculum — they are a celebration. You have given your daughter a remarkable year of play, language, exploration, movement, art, music, wonder, and loving presence. This is the season to reflect, enjoy, and let her simply be.",
+    intro:"The final weeks of the year are not a curriculum — they are a celebration. You have given Naomi a remarkable year of play, language, exploration, movement, art, music, wonder, and loving presence. This is the season to reflect, enjoy, and let her simply be.",
     activities:[
       {name:"Year in Photos",time:"20 min",icon:"📸",desc:"Look through the year's photos together. Name what you see: activities, places, people, seasons. 'There you are in summer! And the leaves! You have grown SO much.' This builds autobiographical memory and a narrative sense of self.",materials:"Phone or printed photos from the year"},
       {name:"Favourite Things Revisit",time:"Morning",icon:"⭐",desc:"Spend one morning revisiting her very favourite activities from the year — whichever two or three she lights up most about. Knowing your child's particular joys is the most important curriculum knowledge of all.",materials:"Whatever she loves most"},
@@ -497,7 +505,7 @@ const WEEKS = [
       {name:"Birthday Planning",time:"10 min",icon:"🎂",desc:"Begin planning her second birthday together: 'your birthday is coming. You are going to be TWO. What kind of cake shall we have? Who shall we invite?' Let her participate in the imagining.",materials:"A calendar, her imagination"},
     ],
     watchFor:["How differently does she play and communicate compared to June?","What are her strongest current interests and competencies?","How does she manage her emotions compared to six months ago?","What is the quality of your relationship — the ease and joy of your days together?"],
-    milestones:["By 24 months: typically 50–300 words, 2–3 word utterances, running confidently, drawing circles, engaging in pretend play, showing empathy, using 'I' and 'me'","Deep wellbeing markers: secure attachment, curiosity, persistence, delight in learning","The quality of a child's play is the most reliable indicator of their development at this age","You, the present and engaged father, are her most important developmental tool"],
+    milestones:["By 24 months: typically 50–300 words, 2–3 word utterances, running confidently, drawing circles, engaging in pretend play, showing empathy, using 'I' and 'me'","Deep wellbeing markers: secure attachment, curiosity, persistence, delight in learning","The quality of a child's play is the most reliable indicator of their development at this age","You, Naomi's present and engaged father, are her most important developmental tool"],
     adapt:"These final weeks are not about adaptation. They are about appreciation. You know her better than any guide does. Trust yourself. You've spent a year paying close attention to who she is — and that is the whole work of early childhood education."
   },
 ];
@@ -541,7 +549,7 @@ let state = {
   weekIdx: getInitialWeek(),
   tab: "activities",
   overlay: null, // "weeks"|"help"|"notes"
-  helpMsgs: [{from:"guide",text:"Hello! I'm here to help you with the curriculum. Ask me about any activity, what to expect this week, how to adapt something, or anything about your daughter's development. 👶"}],
+  helpMsgs: [{from:"guide",text:"Hello! I'm here to help you with Naomi's curriculum. Ask me about any activity, what to expect this week, how to adapt something, or anything about Naomi's development. 👶"}],
   helpInput: "",
   noteText: "",
   showBanner: !localStorage.getItem("banner_dismissed"),
@@ -559,7 +567,7 @@ function render() {
   app.innerHTML = `
     ${state.showBanner ? `
     <div class="install-banner" id="banner">
-      <p id="banner-text">📲 Add to your home screen for the full app experience</p>
+      <p id="banner-text">📲 Add Naomi's app to your home screen</p>
       <button id="install-btn" style="display:none">Install</button>
       <button class="dismiss" id="dismiss-btn">✕</button>
     </div>` : ""}
@@ -833,7 +841,7 @@ window.addEventListener("beforeinstallprompt", e => {
   const btn = document.getElementById("install-btn");
   const txt = document.getElementById("banner-text");
   if (btn && txt) {
-    txt.textContent = "📲 Install as an app on your phone";
+    txt.textContent = "📲 Install Naomi's curriculum app";
     btn.style.display = "block";
   }
 });
