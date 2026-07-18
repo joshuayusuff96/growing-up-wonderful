@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 <meta name="apple-mobile-web-app-title" content="Naomi"/>
 <meta name="mobile-web-app-capable" content="yes"/>
-<meta name="description" content="Naomi Yusuff's home curriculum — starting 9 June 2025."/>
+<meta name="description" content="Naomi Yusuff's home curriculum — starting 4 July 2026."/>
 <title>Naomi Yusuff — Growing Up Wonderful</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -135,7 +135,7 @@
   <div style="font-size:56px;margin-bottom:16px;">👶</div>
   <div style="font-size:13px;letter-spacing:3px;text-transform:uppercase;opacity:.7;margin-bottom:8px;font-weight:600;">Growing Up Wonderful</div>
   <div style="font-size:36px;font-weight:800;margin-bottom:6px;">Naomi Yusuff</div>
-  <div style="font-size:16px;opacity:.8;margin-bottom:40px;">Week 1 starts 9 June 2025</div>
+  <div style="font-size:16px;opacity:.8;margin-bottom:40px;" id="splash-date">Week 1 starts...</div>
   <button onclick="document.getElementById('splash').style.display='none'" style="background:white;color:#1B3A5C;border:none;border-radius:14px;padding:14px 36px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.2);">Let's Go 🌱</button>
   <div style="font-size:12px;opacity:.5;margin-top:20px;">For Joshua & Naomi's mum</div>
 </div>
@@ -144,7 +144,7 @@
 <script>
 // ─── Data ────────────────────────────────────────────────────────────────────
 const WEEKS = [
-  { num:1, dates:"9–15 Jun", theme:"Hello, World Again", age:"~15 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Observation & Baseline",
+  { num:1, storyId:1, theme:"Hello, World Again", age:"~15 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Observation & Baseline",
     intro:"This first week is about observation — yours. Spend a few days noticing where she naturally gravitates, what holds her attention, and how she moves through space. This is your baseline. Everything builds from it.",
     activities:[
       {name:"Treasure Basket",time:"10 min",icon:"🧺",desc:"Fill a low basket with 6–8 everyday objects of varied textures — a wooden spoon, a smooth stone, a small sponge, a metallic cup, a fabric square, a pinecone. Sit nearby and let her explore freely. Don't name things yet — just be present and warm.",materials:"Basket, wooden spoon, smooth stone, sponge, metallic cup, fabric square, pinecone"},
@@ -157,7 +157,7 @@ const WEEKS = [
     milestones:["Walking with increasing confidence and balance","Using 1–3 recognizable words consistently","Pointing to indicate interest (proto-declarative pointing)","Showing clear attachment and preference for primary caregiver"],
     adapt:"If she seems overwhelmed by the treasure basket, simplify to just 3 objects. If she speeds through everything, she needs more novelty and complexity — follow her lead. There's no wrong pace this week. You're just watching and learning her."
   },
-  { num:2, dates:"16–22 Jun", theme:"My Body, My World", age:"~15.5 months", color:"#B05070", light:"#FCF0F2", focus:"Body Awareness & Language",
+  { num:2, storyId:7, theme:"My Body, My World", age:"~15.5 months", color:"#B05070", light:"#FCF0F2", focus:"Body Awareness & Language",
     intro:"This week turns attention inward — to her body. Naming body parts isn't just vocabulary; it's the foundation of body awareness, self-regulation, and eventually emotional literacy. Keep it playful, rhythmic, and physical.",
     activities:[
       {name:"Body Part Song",time:"5 min",icon:"🎵",desc:"Sing 'Head and shoulders, knees and toes' or make your own tune. Touch each part on yourself first, then gently on her. Do it daily — repetition at this age is learning, not boredom.",materials:"Just your voice and hands"},
@@ -170,7 +170,7 @@ const WEEKS = [
     milestones:["Beginning to point to named body parts (1–3 is typical)","Imitating actions with a 1–2 second delay","Walking with less falling; may attempt to climb low furniture","Handing objects to adults as a social gesture"],
     adapt:"If she can already point to 4–5 body parts, introduce more specific ones: elbow, chin, wrist. If body part pointing isn't clicking yet, focus on the physical movement activities and return to naming next week. The play is always the point."
   },
-  { num:3, dates:"23–29 Jun", theme:"Sound and Language", age:"~16 months", color:"#6B5EA8", light:"#F0EEF9", focus:"Language Foundation",
+  { num:3, storyId:12, theme:"Sound and Language", age:"~16 months", color:"#6B5EA8", light:"#F0EEF9", focus:"Language Foundation",
     intro:"Language explodes in fits and starts at this age. Your most powerful tool isn't a flashcard — it's your voice. Narrate your day. Comment on what she's doing. Read aloud. Ask questions you don't need answered. You are building the neural scaffolding for every word that will come.",
     activities:[
       {name:"Sportscaster Narration",time:"10 min",icon:"🎙️",desc:"For 10 minutes during free play, narrate everything she does in simple sentences as if commentating a sports match: 'She picks up the block. It's a blue block. She's putting it in the box. Oh! It fell out.' This rich input is vocabulary gold.",materials:"None — just your voice during her play"},
@@ -183,7 +183,7 @@ const WEEKS = [
     milestones:["Vocabulary of approximately 5–10 words (or approximations) is typical","Using gestures plus sounds to communicate wants","Showing comprehension of many more words than she can produce","Responding to simple one-step requests ('come here', 'give me')"],
     adapt:"If she's already stringing two words together, start offering choices in language: 'apple or banana?' If words are slow to come, don't panic — keep talking. The language bath you're giving her is the treatment."
   },
-  { num:4, dates:"30 Jun – 6 Jul", theme:"Little Hands, Big Skills", age:"~16 months", color:"#D97706", light:"#FEF3C7", focus:"Fine Motor Development",
+  { num:4, storyId:13, theme:"Little Hands, Big Skills", age:"~16 months", color:"#D97706", light:"#FEF3C7", focus:"Fine Motor Development",
     intro:"Fine motor development at this age is about pinching, grasping, releasing, and stacking. These are the physical foundation for writing, drawing, self-feeding, and dressing. Every time she tries to turn a page or pick up a pea, she's doing serious work.",
     activities:[
       {name:"Posting Box",time:"10 min",icon:"📦",desc:"Cut a hole in the lid of a shoebox just large enough for a wooden block or large coin to drop through. Show her once — drop an object in, shake the box so she hears it rattle — then let her practice.",materials:"Shoebox with cut lid, 5–6 large safe objects to post"},
@@ -196,7 +196,7 @@ const WEEKS = [
     milestones:["Beginning to use a spoon, however messily","Turning pages of a board book (multiple pages at once is normal)","Scribbling spontaneously with crayon","Building a tower of 2–3 blocks"],
     adapt:"If fine motor skills feel delayed, prioritise pouring and squishing which require less precision. If she's ahead, introduce threading large beads onto a thick pipe cleaner — supervised closely."
   },
-  { num:5, dates:"7–13 Jul", theme:"Exploring the Natural World", age:"~16.5 months", color:"#5A7A5A", light:"#EDF4ED", focus:"Sensory Science",
+  { num:5, storyId:8, theme:"Exploring the Natural World", age:"~16.5 months", color:"#5A7A5A", light:"#EDF4ED", focus:"Sensory Science",
     intro:"Summer is your classroom this week. Nature offers the richest sensory curriculum money can't buy — texture, temperature, colour, smell, sound, and movement all at once. Go outside every day, even for fifteen minutes. Let her touch the earth.",
     activities:[
       {name:"Mud Kitchen",time:"20 min",icon:"🌱",desc:"A small tray of soil or mud with spoons, cups, and sticks. Let her dig, pour, mix, squish. This is sensory integration, fine motor work, and early scientific thinking all in one glorious mess. Clothes can be washed.",materials:"Tray or corner of garden, spoons, cups, sticks"},
@@ -209,7 +209,7 @@ const WEEKS = [
     milestones:["Increased ability to walk on uneven surfaces","Growing vocabulary for describing the immediate environment","Beginning to imitate outdoor actions (sweeping, raking, watering)","Showing genuine excitement and re-engagement with familiar outdoor spaces"],
     adapt:"If she's very tactile-sensitive, offer the material at a distance first, then use a spoon or tool to explore it. If she's a tactile adventurer, let her lead further into natural complexity."
   },
-  { num:6, dates:"14–20 Jul", theme:"Early Empathy and Emotions", age:"~17 months", color:"#B05070", light:"#FCF0F2", focus:"Emotional Intelligence",
+  { num:6, storyId:6, theme:"Early Empathy and Emotions", age:"~17 months", color:"#B05070", light:"#FCF0F2", focus:"Emotional Intelligence",
     intro:"Emotional intelligence is built before children can name emotions. This week, you're laying the groundwork by naming feelings — yours, hers, and the doll's. Simple, warm, honest. Emotional vocabulary is the secret ingredient of every lifelong relationship she will have.",
     activities:[
       {name:"Feelings Faces",time:"10 min",icon:"😊",desc:"Draw or print four large simple faces: happy, sad, scared, surprised. Point to one and make the face yourself. Name it: 'happy face. Look, Daddy is happy!' Encourage her to try mimicking.",materials:"Drawn or printed emotion faces (large and simple)"},
@@ -222,7 +222,7 @@ const WEEKS = [
     milestones:["Showing empathy behaviours such as offering comfort objects","Displaying a full range of basic emotions clearly","Beginning to understand consequences of actions on others' feelings","Using 'no' assertively and understanding simple emotional contexts"],
     adapt:"If she's going through a big emotions phase right now, this week is exactly right. The naming and the presence is enough. If she seems emotionally flat or unresponsive to others' distress, mention this at your next health check."
   },
-  { num:7, dates:"21–27 Jul", theme:"Music and Rhythm", age:"~17 months", color:"#6B5EA8", light:"#F0EEF9", focus:"Rhythm & Language Through Song",
+  { num:7, storyId:9, theme:"Music and Rhythm", age:"~17 months", color:"#6B5EA8", light:"#F0EEF9", focus:"Rhythm & Language Through Song",
     intro:"The human brain is wired for rhythm before it is wired for language. Music activates more areas of the brain simultaneously than almost any other activity. This week, you're building language, mathematical thinking, memory, and coordination through the oldest human technology: song.",
     activities:[
       {name:"Homemade Band",time:"15 min",icon:"🥁",desc:"Make instruments together: fill a bottle with rice (shaker), bang on a pan with a wooden spoon (drum), stretch rubber bands across a box (guitar). Play together. There is no right or wrong sound.",materials:"Pots, spoons, boxes, bottles, rubber bands"},
@@ -235,7 +235,7 @@ const WEEKS = [
     milestones:["Spontaneous rhythmic movement to music","Beginning to fill in final words of familiar songs (pause and wait!)","Recognising familiar songs after just a few notes","Attempting to sing or hum independently"],
     adapt:"If she's very sensitive to loud sounds, use softer instruments and quieter music. If she seems particularly musically engaged, introduce more complex rhythms and call-and-response singing. Either way, daily singing is medicine."
   },
-  { num:8, dates:"28 Jul – 3 Aug", theme:"Building and Constructing", age:"~17.5 months", color:"#1B3A5C", light:"#E8ECF4", focus:"Spatial Reasoning & Engineering",
+  { num:8, storyId:14, theme:"Building and Constructing", age:"~17.5 months", color:"#1B3A5C", light:"#E8ECF4", focus:"Spatial Reasoning & Engineering",
     intro:"Construction play is one of the first expressions of engineering thinking. It develops spatial reasoning, planning, cause-and-effect understanding, and persistence. When she builds and it falls, she's learning to iterate.",
     activities:[
       {name:"Block Town",time:"20 min",icon:"🏠",desc:"Build a simple arrangement of blocks together. Name what you're making: 'this is a house. Here's a door.' Let her knock it down — treat the demolition with equal celebration to the building. Both are learning.",materials:"Wooden unit blocks or large Duplo"},
@@ -248,7 +248,7 @@ const WEEKS = [
     milestones:["Stacking 3–5 blocks independently","Beginning to sort objects by simple properties","Showing clear intent before an action (planning)","Ability to sustain focus on a challenging task for 3–5 minutes"],
     adapt:"If frustration overwhelms her during construction, scaffold more — build together, celebrate each addition. If she's breezing through puzzles and blocks, introduce simple shape sorters with 4–6 different shapes. The sweet spot is always at the edge of her current competence."
   },
-  { num:9, dates:"8–14 Dec", theme:"Stories and Books", age:"~18 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Reading Habit & Literacy Foundation",
+  { num:9, storyId:16, theme:"Stories and Books", age:"~18 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Reading Habit & Literacy Foundation",
     intro:"Eighteen months is a landmark. She's probably doubled her vocabulary in recent weeks. Now is the time to build an even richer relationship with books — not as instructional tools, but as shared worlds you enter together. The habit of daily reading you build this week can last a lifetime.",
     activities:[
       {name:"Book Corner",time:"Setup",icon:"📚",desc:"Create a permanent, accessible book corner: a low shelf or basket with 6–8 board books at her height. She should be able to choose her own book to bring to you. Ownership and choice are part of the reading relationship.",materials:"Low shelf or basket, 6–8 age-appropriate board books"},
@@ -261,7 +261,7 @@ const WEEKS = [
     milestones:["At 18 months, 50+ word vocabulary is typical (though range is wide)","Beginning to name pictured objects in books spontaneously","Sustaining interest in a shared book for 5–8 minutes","Requesting re-reading of favourite books (the best sign of all)"],
     adapt:"If books hold her attention for only a minute or two, keep sessions very short and very interactive — act things out, make sounds, put the book down without fuss. If she's highly engaged and turning pages independently, explore longer simple narrative books."
   },
-  { num:10, dates:"8–14 Dec", theme:"Colours and Sorting", age:"~18 months", color:"#D97706", light:"#FEF3C7", focus:"Colour Recognition & Categorisation",
+  { num:10, storyId:3, theme:"Colours and Sorting", age:"~18 months", color:"#D97706", light:"#FEF3C7", focus:"Colour Recognition & Categorisation",
     intro:"Colour recognition is a cognitive skill that develops between 18 and 24 months. At this stage, she may know one or two colours by name. This week is not a test — it's a warm introduction. Sort things by colour, name colours in context, and let her discover that the world has a vocabulary beyond 'that'.",
     activities:[
       {name:"Colour Basket Sort",time:"10 min",icon:"🎨",desc:"Get 3 small coloured containers (red, blue, yellow) and gather small objects in those colours: a red block, a blue lid, a yellow spoon. Sort them together, naming the colour each time. Do it every day.",materials:"3 small coloured containers, 6–9 small objects in matching colours"},
@@ -274,7 +274,7 @@ const WEEKS = [
     milestones:["Typically recognising and naming 1–2 colours correctly at 18 months","Beginning to sort by colour with guidance","Using descriptive language beyond just naming objects","Growing use of adjectives in speech"],
     adapt:"Don't be concerned if colour naming is inconsistent — it's genuinely hard and develops slowly. The language exposure is what matters now. If she already names 3–4 colours accurately, introduce shape vocabulary alongside colour: 'a red circle'."
   },
-  { num:11, dates:"8–14 Dec", theme:"The World of Pretend", age:"~18.5 months", color:"#B05070", light:"#FCF0F2", focus:"Symbolic & Imaginative Play",
+  { num:11, storyId:5, theme:"The World of Pretend", age:"~18.5 months", color:"#B05070", light:"#FCF0F2", focus:"Symbolic & Imaginative Play",
     intro:"Somewhere around 18 months, the imaginary begins. A block becomes a phone. A stick becomes a spoon. This is one of the most significant cognitive leaps of early childhood — the ability to use one thing to represent another. Welcome to the world of symbolic thinking. It's the beginning of everything.",
     activities:[
       {name:"Dolls Tea Party",time:"15 min",icon:"🫖",desc:"Set up a simple tea party with a few cups and a doll. Pour 'tea', pass a 'biscuit', make the doll sip. Keep your own role lightly playful — follow her lead. You're scaffolding pretend play, not directing a scene.",materials:"Small cups, doll or stuffed animals, perhaps an old cloth as tablecloth"},
@@ -287,7 +287,7 @@ const WEEKS = [
     milestones:["Emergence of symbolic play (one object represents another)","Beginning multi-step pretend sequences","Increasing interest in imitating adult roles and routines","Growing narrative language even if single words: 'sleeping', 'eating', 'driving'"],
     adapt:"If pretend play hasn't clicked yet, model it more richly yourself without expectation — play out a scene with toys while she watches. The seed is planted. If she's already building elaborate scenarios, introduce small-world play: a mat with simple figures, trees, a house."
   },
-  { num:12, dates:"8–14 Dec", theme:"Movement and Coordination", age:"~19 months", color:"#5A7A5A", light:"#EDF4ED", focus:"Gross Motor & Body Awareness",
+  { num:12, storyId:10, theme:"Movement and Coordination", age:"~19 months", color:"#5A7A5A", light:"#EDF4ED", focus:"Gross Motor & Body Awareness",
     intro:"By 19 months, most children are running, though elegantly is still a few months away. This week focus on the full body — proprioception (where am I in space?), bilateral coordination (using both sides of the body together), and balance. Every tumble is data.",
     activities:[
       {name:"Obstacle Course",time:"20 min",icon:"🏃",desc:"Build a simple indoor course: crawl under a table, step over a pillow, climb onto a cushion, walk along a line of tape. Navigate it together. Repeat it. Vary it each day.",materials:"Pillows, tape on floor, low furniture, cushions"},
@@ -300,7 +300,7 @@ const WEEKS = [
     milestones:["Running (though with frequent tumbles)","Kicking a ball forward","Carrying objects while walking","Beginning to walk up stairs with support"],
     adapt:"If she's very cautious about physical challenges, bring the challenge to her comfort level and build in tiny successes. Cautious movers are often very observant — they watch before they leap, which is a strength."
   },
-  { num:13, dates:"8–14 Dec", theme:"The Language of More", age:"~19 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Two-Word Combinations",
+  { num:13, storyId:4, theme:"The Language of More", age:"~19 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Two-Word Combinations",
     intro:"This week we deepen language work with a focus on two-word combinations, which typically emerge between 18 and 24 months. We're also building comprehension — understanding more complex instructions, questions, and descriptions.",
     activities:[
       {name:"Two-Word Modelling",time:"Ongoing",icon:"💬",desc:"When she says a single word, expand it by one word and repeat it warmly: she says 'ball', you say 'big ball', 'red ball', 'throw ball'. This technique (expansion) is one of the most evidence-backed language teaching methods that exists.",materials:"Just your voice"},
@@ -313,7 +313,7 @@ const WEEKS = [
     milestones:["Two-word combinations typically emerge 18–24 months","Understanding of simple prepositions (in, on)","Beginning to use 'me', 'mine', and occasionally 'I'","Asking for items by name or with pointing plus a word"],
     adapt:"If single words are still coming slowly, keep the expansion technique going — one word at a time. If she's already combining two words confidently, begin modelling three-word phrases and introduce why questions."
   },
-  { num:14, dates:"8–14 Dec", theme:"Numbers Begin", age:"~19.5 months", color:"#D97706", light:"#FEF3C7", focus:"Early Numeracy & Quantity",
+  { num:14, storyId:2, theme:"Numbers Begin", age:"~19.5 months", color:"#D97706", light:"#FEF3C7", focus:"Early Numeracy & Quantity",
     intro:"Early numeracy is not about counting to ten like a party trick. It's about the concept of quantity — more, less, one, many, big, small. This week you're building the number sense that underlies all future mathematical thinking. Do it playfully, do it briefly, and do it every single day.",
     activities:[
       {name:"Counting Everything",time:"Ongoing",icon:"🔢",desc:"Count everything in context: steps on the stairs, grapes on the plate, blocks in a pile. Point to each as you count. She won't understand cardinal counting yet, but the rhythm and one-to-one correspondence are going in.",materials:"Everything around you"},
@@ -326,7 +326,7 @@ const WEEKS = [
     milestones:["Solid understanding of 'more' and 'all gone'","Reciting number words in sequence (though not yet accurately counting objects)","Beginning to understand 'one' as a specific quantity","Interest in quantity-related play (filling, sorting, grouping)"],
     adapt:"If counting and quantity language seem abstract to her right now, bring it entirely into snack and mealtime context — this is where quantity is most meaningful."
   },
-  { num:15, dates:"8–14 Dec", theme:"Self-Care and Independence", age:"~20 months", color:"#5A7A5A", light:"#EDF4ED", focus:"Independence & Capability",
+  { num:15, storyId:11, theme:"Self-Care and Independence", age:"~20 months", color:"#5A7A5A", light:"#EDF4ED", focus:"Independence & Capability",
     intro:"The drive for independence at this age is not defiance — it's development. When she says 'me do it' for the fifteenth time while you're trying to get out of the door, she is doing exactly what she should be. This week, slow down and let her.",
     activities:[
       {name:"Dressing Practice",time:"15 min",icon:"👕",desc:"Lay out clothes and let her attempt to pull on a sock, push arms through sleeves, pull up trousers. Use clothes slightly larger than needed for ease. Sit behind her for assistance, not in front — keep her in the driver's seat.",materials:"Easy-access clothing: elasticated waists, slip-on shoes"},
@@ -339,7 +339,7 @@ const WEEKS = [
     milestones:["Strong 'me do it' drive emerging","Beginning to use spoon/fork with increasing success","Able to remove simple clothing items (hat, shoes, socks)","Completing familiar sequences with minimal prompts (washing hands, tidying)"],
     adapt:"If she's very resistant to learning self-care skills, remove the pressure entirely and just model them yourself. If she's ahead, introduce more complex sequences: pouring her own drink from a small pitcher, washing fruit, setting a placemat."
   },
-  { num:16, dates:"8–14 Dec", theme:"Shapes and Spaces", age:"~20 months", color:"#6B5EA8", light:"#F0EEF9", focus:"Spatial Reasoning & Shape Recognition",
+  { num:16, storyId:9, theme:"Shapes and Spaces", age:"~20 months", color:"#6B5EA8", light:"#F0EEF9", focus:"Spatial Reasoning & Shape Recognition",
     intro:"Spatial thinking — understanding how objects relate to each other in space — is a mathematical skill that plays out through physical play long before a child can name a shape. This week balances shape recognition with the spatial vocabulary that makes sense of the world.",
     activities:[
       {name:"Shape Hunt",time:"15 min",icon:"🔍",desc:"Walk through the house identifying shapes: 'the window is a rectangle. The clock is a circle. This book is a rectangle too!' Shapes in the real environment are more meaningful than shapes on flashcards.",materials:"Nothing — just your observing eyes"},
@@ -352,7 +352,7 @@ const WEEKS = [
     milestones:["Identifying at least 1 shape by name (circle is typically first)","Strong interest in fitting, nesting, and sorting activities","Beginning to use spatial prepositions correctly","Increasing deliberateness in mark-making"],
     adapt:"If shape naming is confusing, stay with circle and square for now — two is enough. If she's already naming several shapes, introduce size variations: big circle and small circle."
   },
-  { num:17, dates:"8–14 Dec", theme:"Seasons and Change", age:"~20.5 months", color:"#D97706", light:"#FEF3C7", focus:"Science & Observation",
+  { num:17, storyId:9, theme:"Seasons and Change", age:"~20.5 months", color:"#D97706", light:"#FEF3C7", focus:"Science & Observation",
     intro:"Autumn is the most tangible season for young children — colours change, leaves fall, the air shifts. This week, use what autumn hands you for free. Science, vocabulary, sensory exploration, and a growing understanding that the world moves in patterns.",
     activities:[
       {name:"Leaf Colour Study",time:"20 min",icon:"🍂",desc:"Collect leaves in autumn colours and lay them on a white surface. Name each colour: red, orange, yellow, brown, green. Sort by colour. Crinkle them. Crush them. Smell them.",materials:"Collected autumn leaves"},
@@ -365,7 +365,7 @@ const WEEKS = [
     milestones:["Growing ability to connect cause and effect in natural observations","Vocabulary for weather, seasons, and natural objects expanding","Increasing interest in the living world","Beginning to ask 'what's that?' constantly — this is a developmental explosion, embrace it"],
     adapt:"If your setting doesn't have easy outdoor access, bring autumn in: a bowl of seasonal items from a market or park works. If she's very engaged with nature, introduce more complex vocabulary (deciduous, hibernation) as a gift."
   },
-  { num:18, dates:"8–14 Dec", theme:"Art and Creative Expression", age:"~21 months", color:"#B05070", light:"#FCF0F2", focus:"Process Art & Creativity",
+  { num:18, storyId:3, theme:"Art and Creative Expression", age:"~21 months", color:"#B05070", light:"#FCF0F2", focus:"Process Art & Creativity",
     intro:"Art at this age is not about producing pretty pictures. It's about process: the feeling of paint on hands, the satisfaction of a mark, the surprise of colours mixing. Keep your own aesthetic preferences out of the activity. The point is not the product — the process is the lesson.",
     activities:[
       {name:"Finger Painting",time:"20 min",icon:"👆",desc:"Lay paper on a low surface or directly on a tray. Finger paint, palm print, drag fingers. Name what she does: 'you made a line! Round and round. Your whole hand!' Offer only 2–3 colours to start.",materials:"Non-toxic finger paint, large paper or tray liner"},
@@ -378,7 +378,7 @@ const WEEKS = [
     milestones:["Intentional scribbling and mark-making","Beginning to name drawings, even post-hoc","Showing clear aesthetic preferences (colour choices, media choices)","Increasing fine motor control visible in artwork"],
     adapt:"If she finds unstructured art overwhelming, offer one colour at a time and one tool. If she's highly expressive and engages for long periods, introduce more complex media: watercolours, clay, collage with more varied textures."
   },
-  { num:19, dates:"8–14 Dec", theme:"Animals and Empathy", age:"~21 months", color:"#5A7A5A", light:"#EDF4ED", focus:"Empathy & Classification",
+  { num:19, storyId:19, theme:"Animals and Empathy", age:"~21 months", color:"#5A7A5A", light:"#EDF4ED", focus:"Empathy & Classification",
     intro:"Animals are one of the great portals into empathy for young children. They are interesting, relatable, and safe to practise caring for. This week uses animals as a vehicle for vocabulary expansion, empathy building, classification thinking, and pure childhood delight.",
     activities:[
       {name:"Animal Sorting Game",time:"15 min",icon:"🦁",desc:"Gather plastic or toy animals and sort by type: farm animals, wild animals, sea animals, pets. The conversation around each animal is the learning. 'Does the lion live on a farm? No — where does it live?'",materials:"Collection of toy or plastic animals"},
@@ -391,7 +391,7 @@ const WEEKS = [
     milestones:["Naming many animals accurately","Understanding that different animals need different care/environments","Using animal play to explore empathy and care narratives","Beginning to ask questions about the natural world"],
     adapt:"If she's animal-obsessed (many children are at this age), lean all the way in — more habitat play, more vet play, more animal books. A deep interest is a learning highway."
   },
-  { num:20, dates:"8–14 Dec", theme:"Building a Reading Habit", age:"~21 months", color:"#1B3A5C", light:"#E8ECF4", focus:"Literacy Habit Formation",
+  { num:20, storyId:1, theme:"Building a Reading Habit", age:"~21 months", color:"#1B3A5C", light:"#E8ECF4", focus:"Literacy Habit Formation",
     intro:"By 21 months, a child who has been read to consistently is carrying thousands of words in their comprehension bank. This week, build the reading ritual itself — the time, the place, the feeling. The books are almost secondary.",
     activities:[
       {name:"Morning Book",time:"10 min",icon:"☀️",desc:"Establish a morning book ritual: one book together right after breakfast, every day this week. Same spot, same time, her choice of book. Ritual and repetition are the architecture of habit.",materials:"A low book shelf accessible to her"},
@@ -404,7 +404,7 @@ const WEEKS = [
     milestones:["Beginning to read (narrate) familiar books from memory","Pointing to and naming pictured objects confidently","Showing clear emotional responses to story events","Asking to be read to, unprompted"],
     adapt:"If she's resisting sitting for books, go shorter — one page, one picture, one word. Warmth and brevity beat length and obligation every time. If she's showing early pre-reading behaviours, begin pointing to the N in Naomi on the page."
   },
-  { num:21, dates:"8–14 Dec", theme:"Cooking and the Kitchen", age:"~21.5 months", color:"#D97706", light:"#FEF3C7", focus:"Real-World Learning",
+  { num:21, storyId:5, theme:"Cooking and the Kitchen", age:"~21.5 months", color:"#D97706", light:"#FEF3C7", focus:"Real-World Learning",
     intro:"The kitchen is the best classroom in the house. Measuring is maths. Mixing is science. Following a recipe is sequencing. Eating what you've made is a lesson in pride and nourishment. Bring her into it. Accept the mess.",
     activities:[
       {name:"Baking Together",time:"30 min",icon:"🍞",desc:"Make a simple recipe where she can do real things: pour a cup of flour, stir the mixture, press a cookie cutter. Narrate every step. This is maths (measuring), science (heat changes things), and language all at once.",materials:"Simple recipe — banana bread or simple cookies work well"},
@@ -417,7 +417,7 @@ const WEEKS = [
     milestones:["Growing ability to follow multi-step instructions in sequence","Increasing patience during activities that take time","Strong desire to participate in adult tasks","Beginning to understand that food comes from ingredients and processes"],
     adapt:"If the kitchen causes anxiety (too many sensory inputs), start with a single quiet activity — just washing vegetables at a bowl outside. If she loves it and wants more, teach her to crack an egg. Supervised, it's completely age-appropriate and deeply satisfying."
   },
-  { num:22, dates:"8–14 Dec", theme:"More Words, Bigger World", age:"~22 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Language Explosion",
+  { num:22, storyId:2, theme:"More Words, Bigger World", age:"~22 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Language Explosion",
     intro:"By 22 months, a language explosion may be fully underway — many children this age are acquiring new words every day. The gap between what she understands and what she can produce is still wide, but you should be seeing longer utterances, more questions, and the beginnings of real storytelling.",
     activities:[
       {name:"Question Flood",time:"Ongoing",icon:"❓",desc:"This week, ask more questions than usual. Make them real: 'where do you think the cat went?' 'what should we have for breakfast?' 'why is the sky blue today?' The expectation that she will answer is itself a language invitation.",materials:"Just your voice"},
@@ -430,7 +430,7 @@ const WEEKS = [
     milestones:["Typical 22-month vocabulary: 50–200+ words","Three-word sentences beginning to emerge","Using language to express needs, emotions, and observations","Beginning to tell rudimentary stories with a beginning and middle"],
     adapt:"Language over-regularisation errors (goed, comed, eated) are a sign of sophisticated grammar learning — DO NOT correct them; simply model the correct form warmly in your response."
   },
-  { num:23, dates:"8–14 Dec", theme:"Problem Solving and Thinking", age:"~22 months", color:"#6B5EA8", light:"#F0EEF9", focus:"Cognitive Flexibility",
+  { num:23, storyId:6, theme:"Problem Solving and Thinking", age:"~22 months", color:"#6B5EA8", light:"#F0EEF9", focus:"Cognitive Flexibility",
     intro:"Cognitive flexibility — the ability to try more than one approach when the first doesn't work — is one of the most important skills a person can develop. This week you're not solving problems for her. You're staying close while she solves them herself.",
     activities:[
       {name:"Simple Puzzles",time:"10 min",icon:"🧩",desc:"4–6 piece puzzles with knob handles. When she gets stuck, resist immediately helping. Count silently to five. If she looks at you, try: 'hmm, I wonder if you could turn it?' rather than showing.",materials:"Simple knob puzzles, 4–8 pieces maximum"},
@@ -443,7 +443,7 @@ const WEEKS = [
     milestones:["Using tools to solve problems (stool to reach, stick to retrieve)","Demonstrating persistence across multiple attempts","Beginning to understand and narrate cause and effect","Using language to think aloud: 'no fit... turn...'"],
     adapt:"If frustration overwhelms before problem-solving begins, the challenge is too steep — simplify. If she solves things almost immediately, increase complexity. The sweet zone is a few minutes of genuine effort before success. That's where the growth happens."
   },
-  { num:24, dates:"8–14 Dec", theme:"Early Mark-Making and Pre-Writing", age:"~22 months", color:"#1B3A5C", light:"#E8ECF4", focus:"Pre-Writing Foundation",
+  { num:24, storyId:13, theme:"Early Mark-Making and Pre-Writing", age:"~22 months", color:"#1B3A5C", light:"#E8ECF4", focus:"Pre-Writing Foundation",
     intro:"Pre-writing is not writing. It's the physical and perceptual foundations on which writing will eventually be built: lines, circles, direction, intention, grip. Don't rush to letters. Build the hand strength, the control, and the joyful relationship with making marks.",
     activities:[
       {name:"Controlled Line Drawing",time:"10 min",icon:"✏️",desc:"Draw a simple dotted line across paper and let her try to follow it with a crayon. Use very few dots and make the path wide. This is not about accuracy — it's about the concept of following a path intentionally.",materials:"Paper with dotted lines, chunky crayons"},
@@ -456,7 +456,7 @@ const WEEKS = [
     milestones:["Holding a crayon with some finger control (not just full fist)","Drawing horizontal and vertical lines with intent","Beginning circular scribbles","Showing interest in adults' writing and attempting to imitate it"],
     adapt:"If grip is still very whole-fist, focus on playdough strength building and finger isolation games. If she's showing interest in letters, begin pointing to the letters in Naomi's name as you write them: 'N for Naomi'."
   },
-  { num:25, dates:"8–14 Dec", theme:"Playing Together and Apart", age:"~22.5 months", color:"#B05070", light:"#FCF0F2", focus:"Social Play & Turn-Taking",
+  { num:25, storyId:11, theme:"Playing Together and Apart", age:"~22.5 months", color:"#B05070", light:"#FCF0F2", focus:"Social Play & Turn-Taking",
     intro:"As she approaches two, the social landscape is changing. She may be more interested in other children, more aware of how play works in groups, and also more fiercely independent. This week focuses on social play — the rules, the repairs, and the rich complexity of playing alongside and with another person.",
     activities:[
       {name:"Parallel Play Observation",time:"20 min",icon:"👧",desc:"If she has regular contact with another toddler, set up parallel play: two sets of similar materials, side by side, no expectation of sharing yet. Narrate what each child is doing. Parallel play is developmentally correct and rich at this age.",materials:"Two sets of similar toys placed nearby"},
@@ -469,7 +469,7 @@ const WEEKS = [
     milestones:["Parallel play developing into brief moments of cooperative play","Beginning to understand the concept of taking turns","Showing awareness of social rules, even without following them","Using language to manage social situations: 'mine', 'no', 'please', 'give'"],
     adapt:"If social play is very difficult for her, reduce the complexity — one-to-one with you rather than other children, smaller turn-taking loops. If she's socially confident and engaged with peers, she's ready for more group activities."
   },
-  { num:26, dates:"8–14 Dec", theme:"A Full World of Words", age:"~23 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Conversation & Narrative",
+  { num:26, storyId:2, theme:"A Full World of Words", age:"~23 months", color:"#2A7B8C", light:"#E8F4F8", focus:"Conversation & Narrative",
     intro:"One month before her second birthday. By now, the language journey you've been on together has filled her with a working vocabulary she uses every day. This week is about celebrating how far she has come and pushing joyfully into the next layer: narrative, description, and the first real conversations.",
     activities:[
       {name:"Conversation Corner",time:"10 min",icon:"💬",desc:"Each morning, have a brief, real conversation — not about logistics, but about her: 'what shall we do today? What was your favourite thing yesterday? What do you like better, apples or oranges?' Listen fully. Let her lead the thread.",materials:"Just your undivided attention"},
@@ -482,7 +482,7 @@ const WEEKS = [
     milestones:["200+ words in vocabulary is typical by 23 months (though range is wide)","Most two-word and many three-word utterances","Beginning past tense (often over-regularised: 'eated', 'goed')","Talking during independent play"],
     adapt:"Language over-regularisation errors are a sign of sophisticated grammar learning — do not correct them; model the correct form warmly. If vocabulary is still lower than expected, bring it up at the two-year check — but keep talking, reading, and singing regardless."
   },
-  { num:27, dates:"8–14 Dec", theme:"Celebrations and Traditions", age:"~23 months", color:"#D97706", light:"#FEF3C7", focus:"Ritual, Community & Belonging",
+  { num:27, storyId:20, theme:"Celebrations and Traditions", age:"~23 months", color:"#D97706", light:"#FEF3C7", focus:"Ritual, Community & Belonging",
     intro:"December brings ritual, and ritual is one of the great gifts of early childhood. Predictable, repeated, meaningful events teach children about time, family, community, belonging, and the pattern of the year. Whatever you celebrate, the point is participation, wonder, and the warm knowledge that this family does certain things together.",
     activities:[
       {name:"Decoration Making",time:"30 min",icon:"✨",desc:"Make simple decorations together: paper chains, salt-dough ornaments, painted pine cones. Let her choose colours, place things where she wants, take pride in her contribution to the home's appearance.",materials:"Paper, paint, salt dough (1 cup flour, ½ cup salt, ½ cup water), natural items"},
@@ -495,7 +495,7 @@ const WEEKS = [
     milestones:["Understanding of anticipation (something is coming)","Ability to talk about family members and relationships","Beginning to delay gratification (not all children can yet)","Rich pretend play incorporating real-world events and traditions"],
     adapt:"If the sensory overload of the festive season is hard for her (some children find this period overwhelming), protect quiet time at home. A calm, consistent daily rhythm is the best gift you can give during a busy season."
   },
-  { num:28, dates:"15–31 Dec", theme:"Looking Back, Leaning Forward", age:"~23 months", color:"#1B3A5C", light:"#E8ECF4", focus:"Reflection & Celebration",
+  { num:28, storyId:15, theme:"Looking Back, Leaning Forward", age:"~23 months", color:"#1B3A5C", light:"#E8ECF4", focus:"Reflection & Celebration",
     intro:"The final weeks of the year are not a curriculum — they are a celebration. You have given Naomi a remarkable year of play, language, exploration, movement, art, music, wonder, and loving presence. This is the season to reflect, enjoy, and let her simply be.",
     activities:[
       {name:"Year in Photos",time:"20 min",icon:"📸",desc:"Look through the year's photos together. Name what you see: activities, places, people, seasons. 'There you are in summer! And the leaves! You have grown SO much.' This builds autobiographical memory and a narrative sense of self.",materials:"Phone or printed photos from the year"},
@@ -683,6 +683,69 @@ const BIBLE = [
   },
 ];
 
+const STORIES = [
+  { id:1, title:"The Sleepy Little Cloud", icon:"☁️", category:"children", ageNote:"12–24 months", length:"~2 min",
+    text:"High in the blue sky, a little cloud is floating. She has floated all day long — over the trees, over the hills, over the roof of your house. Now the sun is going down, orange and soft, and the little cloud is getting sleepy.\n\n\"Time for bed,\" whispers the wind, and gently, gently, pushes her toward a soft grey blanket of night sky.\n\nThe little cloud yawns a cloudy yawn. She watches one star wake up. Then two stars. Then three.\n\n\"Hush now, drift now, time to rest,\" hums the sky.\n\nThe little cloud closes her cloudy eyes. She turns pink, then purple, then a deep sleepy blue. All around her, the stars keep watch, twinkling like tiny nightlights.\n\nAnd just like the little cloud, it is time for you to float gently into your soft bed, pull up your blanket, and close your eyes too.\n\nHush now, drift now, time to rest. Goodnight, little cloud. Goodnight, little you." },
+
+  { id:2, title:"One, Two, Where Are You?", icon:"🔢", category:"children", ageNote:"15–30 months", length:"~2 min",
+    text:"One little duck hides behind the log. \"One!\" you say, and there she is!\n\nTwo bunnies hide behind the bush, their ears popping up like question marks. \"Two!\" you say, and out they hop!\n\nThree mice squeeze under a leaf, giggling with their tiny mouse laughs. \"Three!\" you say, and they scurry out to take a bow.\n\nFour frogs hide inside the pond, only their eyes poking out of the water. \"Four!\" you say, and they leap out with a splash.\n\nFive fireflies hide inside a jar, blinking their little lights on and off. \"Five!\" you say, and they float up into the evening air, lighting the way home.\n\nOne, two, three, four, five — all the little friends are found, and all the little friends are tired. Time to count backwards now: five, four, three, two, one... and everyone goes to sleep." },
+
+  { id:3, title:"The Colour Parade", icon:"🌈", category:"children", ageNote:"12–24 months", length:"~2 min",
+    text:"Here comes Red, marching first, loud as a drum — boom, boom, boom! Red is a fire truck, a strawberry, a stop sign standing tall.\n\nHere comes Yellow, dancing next, bright as the morning sun. Yellow is a banana, a school bus, a little chick saying peep.\n\nHere comes Blue, floating along, calm as the ocean. Blue is the sky, a blueberry, a river running to the sea.\n\nHere comes Green, hopping through, fresh as new grass. Green is a leaf, a frog, a whole forest waking up.\n\nHere comes Orange, rolling by, round as a pumpkin. Orange is a carrot, a sunset, a little fox trotting home.\n\nAnd last comes Purple, quiet and soft, like the very end of the day. Purple is a grape, a violet flower, and the sky just before the stars come out.\n\nAll the colours link hands and take a bow. The parade is over. Time for bed." },
+
+  { id:4, title:"Boots Go Splash", icon:"🥾", category:"children", ageNote:"12–24 months", length:"~2 min",
+    text:"Pit, pat, pit, pat — rain is falling on the window. On go the little yellow boots, squeak, squeak, squeak.\n\nOut the door, into the garden. The first puddle is small. Splash! Water jumps up like it's saying hello.\n\nThe second puddle is bigger. Splash, splash! Little boots stomp right in the middle.\n\nThe third puddle is the biggest of all, wide as a lake. SPLASH SPLASH SPLASH! Water flies everywhere, and somebody laughs so hard they nearly fall down.\n\nA worm wiggles across the path. \"Hello, worm,\" says a quiet voice. The worm doesn't answer, but that's alright — some friends just wiggle hello.\n\nThe rain slows down to pit... pat... pit... pat... and then stops altogether. The sky clears, and a rainbow stretches from one puddle to the next.\n\nTime to go inside now. Off come the little yellow boots. Warm socks. Warm bed. Splashing is tiring work." },
+
+  { id:5, title:"The Tiny Seed", icon:"🌱", category:"children", ageNote:"15–30 months", length:"~2 min",
+    text:"In the soft brown dirt, a tiny seed goes to sleep. It is smaller than a fingernail, but it has a very big dream.\n\nThe rain comes — pitter, patter — and tucks the seed in like a blanket.\n\nThe sun comes — warm and golden — and says, \"good morning, little seed.\"\n\nDays pass. The seed stretches. First one tiny green shoot pokes through the dirt, reaching up, up, up toward the light.\n\nMore days pass. Two leaves unfold, soft and new, like little hands opening.\n\nMore days pass. A stem grows tall and strong, standing straight up in the garden.\n\nAnd one morning — can it be? — a bud appears at the very top. It waits one more day, and then... it opens.\n\nA flower! Bright and beautiful, turning its face toward the sun.\n\nThe tiny seed, that was once so small, is now a whole flower, full grown and glowing. All it needed was time, water, sun, and love — just like you." },
+
+  { id:6, title:"Bear Can't Find His Roar", icon:"🐻", category:"children", ageNote:"18–36 months", length:"~2 min",
+    text:"Little Bear wakes up one morning and opens his mouth to say good morning the bear way — with a big ROAR. But nothing comes out. Not even a little growl.\n\n\"Oh no,\" says Little Bear. \"Where did my roar go?\"\n\nHe asks the rabbit. \"Have you seen my roar?\" The rabbit shakes her head and hops away, quiet as ever.\n\nHe asks the owl. \"Have you seen my roar?\" The owl blinks slowly and says, \"Hoo, hoo,\" which doesn't help at all.\n\nLittle Bear sits down on a log, feeling small and a little bit sad. And that's when Mama Bear finds him.\n\n\"What's wrong, little one?\" she asks, wrapping him in a big warm hug.\n\n\"I lost my roar,\" Little Bear says quietly, right into her fur.\n\nMama Bear smiles. \"Sometimes our big feelings need a rest too. Your roar isn't lost. It's just resting, right here,\" she says, tapping his chest gently. \"It will come back when you need it.\"\n\nAnd sure enough, the next morning, Little Bear wakes up and — ROOOAR! There it is." },
+
+  { id:7, title:"The Biggest Little Hug", icon:"🤗", category:"children", ageNote:"12–24 months", length:"~2 min",
+    text:"A little hedgehog wants to give the biggest hug in the whole forest, but every time she tries, her spikes get in the way. Ouch!\n\nShe tries to hug the rabbit. \"Ouch, too spiky!\" says the rabbit, gently.\n\nShe tries to hug the squirrel. \"Ouch, too spiky!\" says the squirrel, kindly.\n\nThe little hedgehog feels sad. How can she share her big hug if her spikes always get in the way?\n\nThen an old, wise tortoise says, \"Come here, little one. My shell is hard as stone. Your spikes won't bother me at all.\"\n\nThe little hedgehog curls up close, and the tortoise wraps his short little arms around her as best he can. It isn't a perfect hug. It's a bit lopsided and a bit slow. But it is warm, and it is real, and it is exactly the hug she needed.\n\n\"Thank you,\" whispers the hedgehog.\n\n\"That's what hugs are for,\" says the tortoise. \"Not to be perfect. Just to say: I'm glad you're here.\"\n\nAnd that is exactly what a hug says to you too, every single night." },
+
+  { id:8, title:"Whose Tail Is This?", icon:"🦊", category:"children", ageNote:"15–30 months", length:"~2 min",
+    text:"Look! Here is a tail — long, orange, and bushy, with a white tip at the end. Whose tail could this be?\n\nIs it a cat's tail? No, a cat's tail is smoother than this.\n\nIs it a squirrel's tail? No, a squirrel's tail is much smaller than this.\n\nLet's follow the tail and see where it goes... around the tree, through the tall grass, past the sleepy garden gate...\n\nThere! A pointy nose. Two pointy ears. Bright, clever eyes.\n\nIt's a fox! A sly little fox, trotting home through the twilight, tail swishing behind her like a soft orange flag.\n\n\"Goodnight, fox,\" you whisper, and she disappears into her den, curling that long bushy tail around herself like a blanket.\n\nNow it's your turn. You don't have a bushy tail, but you do have a soft blanket, and it works just as well. Curl up. Tuck in. Just like the fox, it's time to rest." },
+
+  { id:9, title:"The Moon's New Coat", icon:"🌙", category:"children", ageNote:"15–30 months", length:"~2 min",
+    text:"One night, the Moon looks down at herself and sighs. \"I am tired of wearing the same pale grey coat every single night.\"\n\nSo she asks the stars for help. \"Will you lend me some sparkle?\" The stars each give her one tiny twinkle, and the Moon shimmers just a little more.\n\nShe asks the sunset for help. \"Will you lend me some colour?\" The sunset gives her a soft edge of orange and pink, just for a moment, before it fades to night.\n\nShe asks the clouds for help. \"Will you lend me something soft?\" The clouds drift gently across her face like a lacy scarf, and the Moon smiles.\n\nNow the Moon wears a new coat every single night — some nights sparkly, some nights soft, some nights round and full, some nights just a sliver of a smile in the sky.\n\nTonight, look out the window. What is the Moon wearing tonight? Whatever it is, she is wearing it just for you, watching over you while you sleep." },
+
+  { id:10, title:"Slow Down, Turtle", icon:"🐢", category:"children", ageNote:"18–36 months", length:"~2 min",
+    text:"All the animals are racing to the top of the hill to watch the sunset. Rabbit dashes past. Deer bounds past. Even Snail is inching along as fast as her little snail body can go.\n\nTurtle walks slowly. One foot. Then another foot. Then another. Then another.\n\n\"You'll miss it, Turtle!\" calls Rabbit from far ahead. \"The sunset won't wait for you!\"\n\nTurtle doesn't hurry. He just keeps walking, slow and steady, watching the ants on the path and the ladybird on a leaf and the way the light changes colour, bit by bit, as he goes.\n\nWhen Turtle finally reaches the top, the other animals are already tired and a little bit cross from rushing. But Turtle sits down calm and happy, just in time to watch the whole sky turn gold, then pink, then a deep and gentle purple.\n\n\"How did you enjoy that so much, when you took so long to get here?\" asks Rabbit.\n\nTurtle smiles. \"I wasn't trying to get there fast. I was trying to notice everything on the way.\"\n\nSlow and steady sees the most beautiful things." },
+
+  { id:11, title:"The Kindness Garden", icon:"🌻", category:"children", ageNote:"18–36 months", length:"~2 min",
+    text:"In a quiet corner of the yard, there is a very special garden. It doesn't grow flowers from seeds. It grows flowers from kindness.\n\nWhen a little girl shares her crackers with her brother, a tiny green sprout appears.\n\nWhen a little boy helps his friend up after a tumble, the sprout grows a leaf.\n\nWhen someone says \"I love you\" at bedtime, a bud begins to form.\n\nWhen someone gives a hug just because someone else looks sad, the bud opens into a bright, beautiful flower.\n\nThe Kindness Garden grows a little more every single day, watered not by rain, but by small, gentle things: sharing, helping, hugging, saying sorry, saying thank you.\n\nYou have a Kindness Garden too, right inside you. Every kind thing you do today made it grow a little bigger. Every kind thing someone did for you helped it grow too.\n\nBefore you sleep tonight, think of one kind thing that happened today. That's one more flower, blooming quietly in the dark, ready to greet you in the morning." },
+
+  { id:12, title:"Where Do the Stars Sleep?", icon:"⭐", category:"children", ageNote:"12–24 months", length:"~2 min",
+    text:"Every night, the stars come out to twinkle over the whole sleepy world. But where do the stars sleep during the day?\n\nSome say the stars sleep inside the sun, resting in its warm golden light until it's their turn to shine.\n\nSome say the stars sleep behind the blue sky, tucked away like buttons behind a curtain, waiting patiently.\n\nSome say the stars never sleep at all — they are simply too far away for us to see them in the daytime, twinkling on and on, quietly, always.\n\nNo one knows for certain. But every single night, without fail, the stars wake up one by one, first just a few, then hundreds, then thousands, scattered like tiny lanterns across the dark.\n\nThey watch over the owls hooting in the trees. They watch over the foxes trotting home. They watch over every sleepy little child, tucked into every sleepy little bed.\n\nAnd right now, they are watching over you too, twinkling their quiet goodnight, one star at a time." },
+
+  { id:13, title:"The Grumpy Sock", icon:"🧦", category:"children", ageNote:"18–36 months", length:"~2 min",
+    text:"In the laundry basket, one little sock is grumpy. \"I have a hole in my toe,\" he grumbles. \"I am not as nice as the other socks.\"\n\nThe stripy sock says, \"But you're so soft and warm!\"\n\nThe grumpy sock huffs. \"That doesn't matter. I have a hole.\"\n\nThe polka-dot sock says, \"But you match perfectly with your sock brother!\"\n\nThe grumpy sock huffs again. \"That doesn't matter either. I have a hole.\"\n\nThen a gentle hand reaches into the basket and picks up the grumpy sock. Snip, snip goes a needle and thread, and — just like that — the hole is mended with a little patch shaped like a star.\n\n\"There,\" says the gentle voice. \"Now you have something none of the other socks have — a tiny star, just for you.\"\n\nThe grumpy sock isn't grumpy anymore. He wiggles happily onto a foot, star patch and all.\n\nSometimes the thing we think is our flaw becomes the thing that makes us special. Goodnight, little sock. Goodnight, little star." },
+
+  { id:14, title:"Home for a Little Bird", icon:"🐦", category:"children", ageNote:"15–30 months", length:"~2 min",
+    text:"A little bird flies over the whole wide world, looking for the perfect place to build her nest.\n\nShe tries the top of a mountain. Too windy.\n\nShe tries the middle of a lake. Too wet.\n\nShe tries a busy city street. Too loud.\n\nTired and a little discouraged, she lands on a low branch of an old oak tree in a quiet garden. The branch is sturdy. The leaves are soft. The garden is calm.\n\n\"This will do,\" she says, and she begins to build — twig by twig, straw by straw, one soft feather at a time.\n\nDay by day, the nest grows round and warm and just the right size. When it's finished, the little bird settles in and looks around at her small, cosy home.\n\n\"Home isn't the biggest place, or the fanciest place,\" she chirps softly to herself. \"Home is just the place where you feel safe, and warm, and loved.\"\n\nYou have a home like that too — right here, right now, tucked into your own soft nest. Goodnight, little bird. Goodnight, little you." },
+
+  { id:15, title:"In the Beginning: God Makes Everything", icon:"🌍", category:"bible", ageNote:"12–36 months", length:"~2 min",
+    text:"A long, long time ago, before there were any trees or animals or people, there was only darkness. And God was there.\n\n\"Let there be light,\" said God, and light appeared, warm and bright. God called it Day, and the dark He called Night.\n\nThen God made the sky, high and blue. Then God made the land and the seas, and He filled the land with tall trees and soft grass and colourful flowers.\n\nThen God made the sun to shine in the day, and the moon and stars to shine at night.\n\nThen God made the fish to swim and the birds to fly. He made lions and elephants and tiny buzzing bees. He made turtles, and puppies, and every single creature, each one different, each one special.\n\nLast of all, God made people — He made them to look after His beautiful world, and to be loved by Him.\n\nWhen God finished, He looked at everything He had made — the sky, the sea, the animals, the people — and He said, \"This is very good.\"\n\nGod made the whole world, and God made you too. And just like everything else He made, you are very good." },
+
+  { id:16, title:"Noah and the Big Boat", icon:"🚢", category:"bible", ageNote:"15–36 months", length:"~2 min",
+    text:"There once was a kind man named Noah who loved God very much. One day, God said, \"Noah, build a very big boat. Rain is coming, more rain than the world has ever seen.\"\n\nNoah didn't understand it all, but he trusted God, so he began to build. He hammered and sawed for a long, long time until the boat was finished — bigger than any boat before it.\n\nThen something wonderful happened. Two by two, the animals came: two lions, two elephants, two giraffes, two tiny mice, two of every kind of creature, walking calmly up the ramp into the big boat.\n\nNoah and his family climbed in too, and God closed the door.\n\nThen the rain came, pouring down for a long time. But inside the boat, everyone was warm, and dry, and safe, because God was taking care of them.\n\nWhen the rain finally stopped, Noah sent out a little dove to look for land. She flew and flew, and came back with a fresh green leaf in her beak. Dry land was near!\n\nSoon the big boat came to rest on a mountain, and all the animals and all the people stepped out into the sunshine. God had kept His promise to keep them safe, just like He keeps His promises to you." },
+
+  { id:17, title:"Baby Moses in the River", icon:"🌾", category:"bible", ageNote:"12–30 months", length:"~2 min",
+    text:"Once there was a mother who loved her baby boy so much that she wanted to keep him safe, no matter what.\n\nShe made a little basket, soft and snug, and lined it with something warm. Gently, gently, she placed her baby inside, and set the basket to float among the tall reeds at the edge of the river.\n\nThe baby's big sister, Miriam, stood nearby and watched carefully, hidden among the grass, to make sure her baby brother stayed safe.\n\nSoon, a princess came down to the river to bathe. She saw the little basket floating among the reeds and gently lifted the lid. Inside was the sweetest baby she had ever seen.\n\n\"I will take care of him,\" said the princess, and just like that, the baby had a new home, safe and loved.\n\nMiriam ran and said, \"Would you like someone to help care for him?\" And she brought her very own mother to help — so the baby's mother could still hold him and love him and sing to him, just as before.\n\nGod had a plan to keep that baby safe, even when things looked uncertain. That baby grew up to be Moses, a very brave man who helped many, many people. God watches over every little one, just like He watched over baby Moses — and just like He watches over you." },
+
+  { id:18, title:"Little David and the Giant", icon:"🪨", category:"bible", ageNote:"18–36 months", length:"~2 min",
+    text:"There once was a shepherd boy named David. He was small, but he was very brave, and he loved God with all his heart.\n\nOne day, a giant soldier named Goliath stood on a hill, shouting loudly, and all the big, strong soldiers were too scared to face him.\n\nBut little David wasn't scared. \"God is with me,\" he said simply. He picked up five smooth stones from the stream and put them in his bag, along with his sling.\n\nAll the soldiers stared. How could such a small boy face such a big giant?\n\nDavid walked toward Goliath, calm and steady. He placed one stone in his sling, swung it around, and let it fly — whoosh!\n\nThe little stone hit its mark, and the giant, who had seemed so big and so scary, fell down.\n\nEveryone was amazed. The smallest one among them had been the bravest one of all, because he wasn't relying on his own strength — he was trusting God's strength.\n\nYou might feel small sometimes too, just like David did. But being small doesn't mean you can't be brave. God is with you, just like He was with David." },
+
+  { id:19, title:"Jonah and the Great Big Fish", icon:"🐋", category:"bible", ageNote:"18–36 months", length:"~2 min",
+    text:"God asked a man named Jonah to go and help the people in a faraway city. But Jonah didn't want to go, so he ran the other way and got on a big boat instead.\n\nA huge storm came, tossing the boat back and forth. The sailors were frightened. Jonah knew the storm was because he had run away, so he asked the sailors to put him into the sea, and — the moment they did — the storm grew calm.\n\nJonah sank down, down, down into the water. But God had not forgotten him. God sent a great big fish to swim by, and — gulp! — the fish swallowed Jonah whole.\n\nInside the great big fish, Jonah was safe. Dark, and a little strange-smelling, but safe. For three days, Jonah waited there, and he talked to God, and he said he was sorry, and he decided he would do what God asked after all.\n\nThen the great big fish swam to the shore and — whoosh! — spat Jonah out onto the sand.\n\nJonah got up, a little wobbly, and this time, he went exactly where God asked him to go.\n\nEven when we make mistakes, or try to run away from hard things, God doesn't give up on us. He always gives us another chance, just like He gave Jonah." },
+
+  { id:20, title:"The Night Baby Jesus Was Born", icon:"⭐", category:"bible", ageNote:"12–36 months", length:"~2 min",
+    text:"One quiet night, in a little town called Bethlehem, something wonderful was about to happen.\n\nMary and Joseph had travelled a long way, and they were very tired. They looked for a warm place to rest, but every room was full. Finally, a kind innkeeper offered them a simple stable, warm with soft hay and gentle animals.\n\nThat night, in that quiet stable, baby Jesus was born. Mary wrapped Him snugly and laid Him down in a manger, a soft bed of hay, and He slept peacefully, just like any baby.\n\nFar away on a hillside, shepherds were watching their sheep under the stars. Suddenly, the sky filled with light, and an angel appeared. \"Don't be afraid,\" said the angel. \"Tonight, a very special baby has been born — a baby sent to bring love to the whole world.\"\n\nThe shepherds hurried into town and found the little family in the stable, just as the angel had said. They knelt beside the manger, filled with wonder.\n\nHigh above, one bright star shone over the stable, brighter than all the rest, as if the whole sky was celebrating too.\n\nThat little baby, born so quietly on a starry night, came because God loves this whole world — and He loves you, just as much as He loved that very first Christmas night." },
+];
+
+
 const RHYTHM = [
   {icon:"📖",label:"Morning Book",detail:"10 min · her choice"},
   {icon:"🌳",label:"Outdoor Time",detail:"Every day"},
@@ -711,10 +774,37 @@ const HELP_REPLIES = [
   ()=>"The Faith tab has a Bible verse, teaching, activity, and prayer for every single week. You can use the prayer at bedtime — even if Naomi can't follow it yet, she is hearing you pray over her, and that matters enormously.",
 ];
 
+// ─── Programme start date ───────────────────────────────────────────────────────
+// Recalibrated so Week 3 (age ~16 months) lines up with Naomi's real age today.
+// Change this one date if you ever need to re-align the whole programme.
+const START_DATE = new Date(2026, 6, 4); // 4 July 2026 = start of Week 1
+
+function weekStart(weekNum) {
+  const d = new Date(START_DATE);
+  d.setDate(d.getDate() + (weekNum - 1) * 7);
+  return d;
+}
+function weekEnd(weekNum) {
+  const d = weekStart(weekNum);
+  d.setDate(d.getDate() + 6);
+  return d;
+}
+const MONTH_ABBR = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function weekDateLabel(weekNum) {
+  const s = weekStart(weekNum), e = weekEnd(weekNum);
+  const sameMonth = s.getMonth() === e.getMonth();
+  const sameYear = s.getFullYear() === e.getFullYear();
+  const sD = s.getDate(), eD = e.getDate();
+  const sM = MONTH_ABBR[s.getMonth()], eM = MONTH_ABBR[e.getMonth()];
+  const yearSuffix = sameYear ? (e.getFullYear() !== new Date().getFullYear() ? ` ${e.getFullYear()}` : "") : "";
+  if (sameMonth) return `${sD}–${eD} ${eM}${yearSuffix}`;
+  if (sameYear) return `${sD} ${sM} – ${eD} ${eM}${yearSuffix}`;
+  return `${sD} ${sM} ${s.getFullYear()} – ${eD} ${eM} ${e.getFullYear()}`;
+}
+
 // ─── State ────────────────────────────────────────────────────────────────────
 const getInitialWeek = () => {
-  const june9 = new Date(2025, 5, 9); // Week 1 starts 9 June — Naomi turns 15 months 16 June
-  const diff = Math.floor((Date.now() - june9) / (7*24*60*60*1000));
+  const diff = Math.floor((Date.now() - START_DATE) / (7*24*60*60*1000));
   return Math.max(0, Math.min(diff, WEEKS.length-1));
 };
 
@@ -727,6 +817,8 @@ let state = {
   helpInput: "",
   noteText: "",
   showBanner: !localStorage.getItem("banner_dismissed"),
+  storyFilter: "all", // "all" | "children" | "bible"
+  activeStoryId: null,
 };
 
 // ─── Render ───────────────────────────────────────────────────────────────────
@@ -757,7 +849,7 @@ function render() {
             <div>
               <div class="label">Growing Up Wonderful</div>
               <div class="title">Week ${w.num} · ${w.age}</div>
-              <div class="sub">${w.dates}</div>
+              <div class="sub">${weekDateLabel(w.num)}</div>
             </div>
             <button class="week-btn" onclick="openOverlay('weeks')">All Weeks ▾</button>
           </div>
@@ -786,7 +878,7 @@ function render() {
 
         <!-- Tabs -->
         <div class="tabs">
-          ${[["activities","Activities"],["faith","Faith 🙏"],["observe","Watch For"],["milestones","Milestones"],["adapt","Adapt"]].map(([id,label])=>`
+          ${[["activities","Activities"],["faith","Faith 🙏"],["story","Story 🌙"],["observe","Watch For"],["milestones","Milestones"],["adapt","Adapt"]].map(([id,label])=>`
             <button class="tab-btn${state.tab===id?" active":""}" style="${state.tab===id?`color:${w.color}`:""}" onclick="setTab('${id}')">${label}</button>
           `).join("")}
         </div>
@@ -869,6 +961,31 @@ function render() {
           </div>
         </div>` : ""}
 
+        ${state.tab === "story" ? (() => {
+          const s = STORIES.find(st => st.id === w.storyId) || STORIES[0];
+          const catLabel = s.category === "bible" ? "Bible Story" : "Children's Story";
+          const catColor = s.category === "bible" ? "#6B5EA8" : "#2A7B8C";
+          return `
+        <div style="padding:0 20px 16px;">
+          <div style="background:linear-gradient(135deg,#1B3A5C 0%,#2A7B8C 100%);border-radius:16px;padding:18px;margin-bottom:12px;">
+            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;">🌙 This Week's Bedtime Story</div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+              <span style="font-size:26px;">${s.icon}</span>
+              <span style="font-size:18px;font-weight:800;color:#fff;">${s.title}</span>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.75);">${catLabel} · ${s.ageNote} · ${s.length}</div>
+          </div>
+          <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid #E8ECEF;margin-bottom:12px;">
+            <div style="font-size:13.5px;line-height:1.75;color:#374151;white-space:pre-line;font-family:Georgia,'Times New Roman',serif;">${s.text}</div>
+          </div>
+          <div class="doc-add" style="cursor:pointer;" onclick="setScreen('stories')">
+            <div style="font-size:24px;margin-bottom:6px;">📚</div>
+            <div style="font-size:13px;font-weight:700;color:#374151;margin-bottom:2px;">Browse All 20 Stories</div>
+            <div style="font-size:11px;color:#9CA3AF;">Pick a different story for tonight, any night</div>
+          </div>
+        </div>`;
+        })() : ""}
+
         ${state.tab === "adapt" ? `
         <div class="adapt-card">
           <div class="adapt-title">
@@ -912,7 +1029,52 @@ function render() {
         </div>
       </div>` : ""}
 
+      ${state.screen === "stories" ? `
+      <div class="screen" id="stories-screen">
+        <div class="week-header" style="background:linear-gradient(135deg,#6B5EA8 0%,#B05070 100%);">
+          <div class="label">Growing Up Wonderful</div>
+          <div class="title">Bedtime Stories</div>
+          <div class="sub">20 stories to read before Naomi sleeps, every night</div>
+        </div>
+        <div class="tabs" style="margin:16px 20px 12px;">
+          ${[["all","All 20"],["children","Story time"],["bible","Bible"]].map(([id,label])=>`
+            <button class="tab-btn${state.storyFilter===id?" active":""}" style="${state.storyFilter===id?"color:#6B5EA8":""}" onclick="setStoryFilter('${id}')">${label}</button>
+          `).join("")}
+        </div>
+        <div class="doc-list" style="padding-top:0;">
+          ${STORIES.filter(s => state.storyFilter==="all" || s.category===state.storyFilter).map(s=>`
+            <div class="doc-card" onclick="openStory(${s.id})">
+              <div class="doc-icon" style="background:${s.category==='bible'?'#6B5EA818':'#2A7B8C18'};">${s.icon}</div>
+              <div style="flex:1;min-width:0;">
+                <div class="doc-name">${s.title}</div>
+                <div class="doc-desc">${s.ageNote} · ${s.length}</div>
+              </div>
+              <div class="doc-tag" style="background:${s.category==='bible'?'#6B5EA815':'#2A7B8C15'};color:${s.category==='bible'?'#6B5EA8':'#2A7B8C'};">${s.category==='bible'?'Bible':"Story"}</div>
+            </div>
+          `).join("")}
+        </div>
+      </div>` : ""}
+
       <!-- Overlays -->
+      ${state.overlay === "reader" ? (() => {
+        const s = STORIES.find(st => st.id === state.activeStoryId) || STORIES[0];
+        const catLabel = s.category === "bible" ? "Bible Story" : "Children's Story";
+        const grad = s.category === "bible" ? "linear-gradient(135deg,#6B5EA8 0%,#B05070 100%)" : "linear-gradient(135deg,#2A7B8C 0%,#1B3A5C 100%)";
+        return `
+      <div class="overlay">
+        <div class="overlay-header" style="background:${grad};">
+          <div>
+            <div class="label">${catLabel} · ${s.ageNote}</div>
+            <div class="title">${s.icon} ${s.title}</div>
+          </div>
+          <button class="close-btn" onclick="closeOverlay()">✕</button>
+        </div>
+        <div class="notes-body" style="overflow-y:auto;">
+          <div style="font-size:14.5px;line-height:1.85;color:#374151;white-space:pre-line;font-family:Georgia,'Times New Roman',serif;">${s.text}</div>
+        </div>
+      </div>`;
+      })() : ""}
+
       ${state.overlay === "weeks" ? `
       <div class="overlay">
         <div class="overlay-header" style="background:linear-gradient(135deg,#1B3A5C 0%,#2A7B8C 100%);">
@@ -930,7 +1092,7 @@ function render() {
               <div class="week-num" style="background:${wk.color};">${wk.num}</div>
               <div class="week-info">
                 <div class="week-info-name">${wk.theme}</div>
-                <div class="week-info-sub">${wk.dates} · ${wk.age}</div>
+                <div class="week-info-sub">${weekDateLabel(wk.num)} · ${wk.age}</div>
               </div>
               ${state.weekIdx===i?`<span style="color:${wk.color};font-size:18px;font-weight:800;">✓</span>`:""}
             </button>
@@ -985,6 +1147,10 @@ function render() {
         <span class="nav-icon">📅</span>
         <span class="nav-label${state.screen==="home"?" active":""}">This Week</span>
       </button>
+      <button class="nav-btn" onclick="setScreen('stories')">
+        <span class="nav-icon">📖</span>
+        <span class="nav-label${state.screen==="stories"?" active":""}">Stories</span>
+      </button>
       <button class="nav-btn" onclick="setScreen('docs')">
         <span class="nav-icon">📄</span>
         <span class="nav-label${state.screen==="docs"?" active":""}">Documents</span>
@@ -1014,6 +1180,8 @@ function setTab(t) { state.tab = t; render(); window.scrollTo(0,0); const el = d
 function openOverlay(o) { state.overlay = o; render(); }
 function closeOverlay() { state.overlay = null; render(); }
 function selectWeek(i) { state.weekIdx = i; state.overlay = null; state.tab = "activities"; state.screen = "home"; render(); }
+function setStoryFilter(f) { state.storyFilter = f; render(); }
+function openStory(id) { state.activeStoryId = id; state.overlay = "reader"; render(); }
 
 function sendHelp() {
   const input = document.getElementById("chat-input");
@@ -1099,6 +1267,8 @@ if ("serviceWorker" in navigator) {
 }
 
 // ─── Boot ─────────────────────────────────────────────────────────────────────
+const splashDate = document.getElementById("splash-date");
+if (splashDate) splashDate.textContent = `Week 1 starts ${weekDateLabel(1)}`;
 render();
 </script>
 </body>
